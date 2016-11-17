@@ -22,7 +22,7 @@ angular
 			/*replace:true, 
 			restrict:"EA", 
 			templateUrl:'templates/templateRow.html'*/
-			template: '<td ng-bind="row.nombre"></td><td ng-bind="row.apellido"></td><td ng-bind="row.mail"></td><td><button class="btn btn-default" type="submit">Borrar</button></td>'
+			template: '<td ng-bind="row.nombre"></td><td ng-bind="row.apellido"></td><td ng-bind="row.mail"></td><td><button class="btn btn-default" type="submit" ng-click="borrar(row.id)">Borrar</button></td>'
 
 	};
 });
