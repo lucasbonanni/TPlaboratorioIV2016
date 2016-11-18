@@ -19,6 +19,13 @@ angular
     'satellizer'
   ])
   .config(function ($routeProvider,$authProvider) {
+    $authProvider.baseUrl = 'http://localhost:8080'
+    $authProvider.loginUrl = '/personaSlim/ws1/login';
+    $authProvider.tokenName = 'MiTokenGeneradoEnPHP';
+    $authProvider.tokenPrefix = 'Aplicacion';
+    $authProvider.tokenHeader = 'data';
+
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

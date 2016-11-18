@@ -31,6 +31,16 @@ angular.module('tplaboratorioIv2016App')
 	});
 
 
+	$scope.borrar =function(id)
+	{
+		productos.BorrarProducto(id).then(function(rta){
+			console.info(rta);
+		},function(error){
+			console.info(error);
+		});
+	};
+
+
 	/*$scope.grilla.datos = [
 		{
 			'nombre': 'lucas',
