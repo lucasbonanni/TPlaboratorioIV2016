@@ -26,10 +26,16 @@ angular.module('tplaboratorioIv2016App')
 		console.info("error",error);
 	});
 
-	$scope.borrar =function(id)
+	$scope.borrar =function(index)
 	{
-		personas.BorrarPersona(id).then(function(rta){
+		var element = $scope.grilla.datos[index];
+		console.info('element',element);
+		personas.BorrarPersona(element.id).then(function(rta){
 			console.info(rta);
+			console.info("index",index);
+			if (index > -1) {
+			    $scope.grilla.datos.splice(index, 1);
+			}
 		},function(error){
 			console.info(error);
 		});
