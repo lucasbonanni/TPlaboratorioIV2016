@@ -8,7 +8,7 @@
  * Controller of the tplaboratorioIv2016App
  */
 angular.module('tplaboratorioIv2016App')
-  .controller('UsuariosCtrl', function ($scope,personas) {
+  .controller('UsuariosCtrl', function ($scope,personas, dataFactory) {
     /*this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -19,7 +19,27 @@ angular.module('tplaboratorioIv2016App')
 
 	$scope.grilla.columnas = ['nombre','mail','tipo'];
 
-	personas.TraerTodasLasPersonas().then(function(rta){
+	dataFactory.setService(personas);
+
+	dataFactory.obtenerTodos().then(function(respuesta){
+		console.info("")
+		$scope.grilla.datos = dataFactory.getData();
+	});
+
+	/*var datos = {};
+
+	var datos = dataFactory.getData();
+
+	console.info("elementos grilla",datos);
+
+	$scope.grilla.datos = datos;*/
+
+	$scope.borrar =function(index)
+	{
+		dataFactory.borrarElemento(index);
+	}
+
+/*	personas.TraerTodasLasPersonas().then(function(rta){
 		console.info(rta.data);
 		$scope.grilla.datos = rta.data;
 	},function(error){
@@ -39,6 +59,6 @@ angular.module('tplaboratorioIv2016App')
 		},function(error){
 			console.info(error);
 		});
-	};
+	};*/
 
   });

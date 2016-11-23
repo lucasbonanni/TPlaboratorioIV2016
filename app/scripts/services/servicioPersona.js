@@ -1,30 +1,40 @@
+'use strict';
+
 angular
   .module('tplaboratorioIv2016App')
-  .service('personas', function ($http) {
+  .constant('actionPath','usuarios')
+  .service('personas', function ($http,routeFactory,actionPath) {
 
   	this.TraerTodasLasPersonas = function(){
-  		return $http.get('http://localhost:8080/personaSlim/ws1/usuarios/');
+      var url = routeFactory.getApiRoute(actionPath);
+      console.info("url",url);
+  		return $http.get(url);
   	};
 
 
   	this.TraerUnaPersona = function(id){
-  		return $http.get('http://localhost:8080/personaSlim/ws1/usuarios/'+ id);
+      var url = routeFactory.getApiRoute(actionPath,id);
+  		return $http.get(url);
   	};
 
   	this.BorrarPersona = function(id){
-  		return $http.delete('http://localhost:8080/personaSlim/ws1/usuarios/'+ id);
+      var url = routeFactory.getApiRoute(actionPath,id);
+  		return $http.delete(url);
   	};
 
   	this.ModificarPersona = function(usuario){
-  		return $http.put('http://localhost:8080/personaSlim/ws1/usuarios/',usuario);
+      var url = routeFactory.getApiRoute(actionPath);
+  		return $http.put(url,usuario);
   	};
 
   	this.InsertarPersona = function(usuario){
-  		return $http.post('http://localhost:8080/personaSlim/ws1/usuarios/',usuario);
+      var url = routeFactory.getApiRoute(actionPath);
+  		return $http.post(url,usuario);
   	};
 
   	this.login = function(usuario){
-  		return $http.post('http://localhost:8080/personaSlim/ws1/login',usuario);
+      var url = routeFactory.getApiRoute('login/');
+  		return $http.post(url,usuario);
   	};
 
 
