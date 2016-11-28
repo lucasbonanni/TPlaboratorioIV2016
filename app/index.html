@@ -35,18 +35,18 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">tplaboratorioIv2016</a>
+            <a class="navbar-brand" ui-sref="main">tplaboratorioIv2016</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/usuarios">usuarios</a></li>
-              <li><a ng-href="#/login">Ingresar</a></li>
-              <li><a ng-href="#/altaProducto">Alta Productos</a></li>
-              <li><a ng-href="#/altaUsuario">Alta Usuario</a></li>
-              <li><a ng-href="#/about">About</a></li>
+              <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
+              <li ui-sref-active="active" ng-if="isAdministrator"><a ng-href="#/usuarios">usuarios</a></li>
+              <li ui-sref-active="active"><a ui-sref="login" >Ingresar</a></li>
+              <li ui-sref-active="active" ng-if="isAdministrator || isUser"><a ng-href="#/altaProducto">Alta Productos</a></li>
+              <li ui-sref-active="active" ng-if="isAdministrator"><a ng-href="#/altaUsuario">Alta Usuario</a></li>
+              <li ui-sref-active="active"><a ng-href="#/about">About</a></li>
             </ul>
           </div>
         </div>
@@ -55,8 +55,8 @@
 
 
     <div class="container">
-    <div ng-view=""></div>
-    </div>
+    
+    <ui-view></ui-view>
 
     <!-- /.container -->
 
@@ -110,26 +110,43 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <!--  services -->
+        <script src="scripts/services/servicioLogin.js"></script>
+        <script src="scripts/services/servicioPersona.js"></script>
+        <script src="scripts/services/servicioProductos.js"></script>
+        <!--  endservices -->
+
+        <!--  factories -->
+        <script src="scripts/factories/authProviderFactory.js"></script>
+        <script src="scripts/factories/permisosFactory.js"></script>
+        <script src="scripts/factories/routeFactory.js"></script>
+        <script src="scripts/factories/dataFactory.js"></script>
+        <!--  endfactories -->
+
+        <!--  diretives -->
         <script src="scripts/directives/productoImagen.js"></script>
         <script src="scripts/directives/directivaGrilla.js"></script>
         <script src="scripts/directives/grillaProductos.js"></script>
         <script src="scripts/directives/directivaLogin.js"></script>
-        <script src="scripts/services/servicioPersona.js"></script>
-        <script src="scripts/services/servicioProductos.js"></script>
-        <script src="scripts/services/servicioLogin.js"></script>
-        <script src="scripts/factories/routeFactory.js"></script>
-        <script src="scripts/factories/dataFactory.js"></script>
+        <!--  enddiretives -->
+
+        <!-- controllers -->
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/menuCtrl.js"></script>
         <script src="scripts/controllers/productos.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/usuarios.js"></script>
         <script src="scripts/controllers/altaproducto.js"></script>
         <script src="scripts/controllers/altausuario.js"></script>
-        <!-- endbuild -->
+        <!-- controllers -->
+
+    <!-- endbuild -->
 </body>
 </html>

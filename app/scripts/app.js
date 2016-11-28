@@ -16,48 +16,59 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'satellizer'
+    'satellizer',
+    'ui.router'
   ])
-  .config(function ($routeProvider,$authProvider) {
-    $authProvider.baseUrl = 'http://localhost:8080'
+.config(function ($authProvider,$stateProvider,$urlRouterProvider) {
+    $authProvider.baseUrl = 'http://localhost'
     $authProvider.loginUrl = '/personaSlim/ws1/login';
     $authProvider.tokenName = 'MiTokenGeneradoEnPHP';
     $authProvider.tokenPrefix = 'Aplicacion';
     $authProvider.tokenHeader = 'data';
 
-
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/productos', {
-        templateUrl: 'views/productos.html',
-        controller: 'ProductosCtrl',
-        controllerAs: 'productos'
-      })
-      .when('/login', {
+    $stateProvider
+    .state('main', {
+      url:'/',
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
+    })
+    .state('productos', {
+      url:'/productos',
+      templateUrl: 'views/productos.html',
+      controller: 'ProductosCtrl' 
+    })
+    .state('login', {
+        url:'/login',
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'login'
-      })
-      .when('/usuarios', {
+        controller: 'LoginCtrl'
+    })
+    .state('usuarios',{
+        url:'/usuarios',
         templateUrl: 'views/usuarios.html',
-        controller: 'UsuariosCtrl',
-        controllerAs: 'usuarios'
-      })
-      .when('/altaProducto', {
+        controller: 'UsuariosCtrl'
+    })
+    .state('altaProducto', {
+        url:'/altaProducto',
         templateUrl: 'views/altaproducto.html',
-        controller: 'AltaproductoCtrl',
-        controllerAs: 'altaProducto'
+        controller: 'AltaproductoCtrl'
       })
-      .when('/altaUsuario', {
+    .state('altaUsuario', {
+        url:'/altaUsuario',
         templateUrl: 'views/altausuario.html',
-        controller: 'AltausuarioCtrl',
-        controllerAs: 'altaUsuario'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+        controller: 'AltausuarioCtrl'
+    })
+    $urlRouterProvider.otherwise('/');
+  })
+  .run(function ($rootScope, $location, servicioLogin,permisosFactory) {
+        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams, options) {
+            
+            if(servicioLogin.isAuthenticated()){
+              
+              //get payload of authFactory
+              //if is authenticated do nothing
+            } else
+            {
+              //if not autenticated redirecte to home
+            }
+        });
+    });
