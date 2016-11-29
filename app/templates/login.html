@@ -1,13 +1,13 @@
 <div>
     <div class="row">
-        <div  class="col-md-4">
+        <!--div  class="col-md-4">
             <button class="btn btn-lg btn-block">comprador</button>
-        </div>
-        <div  class="col-md-4">
+        </div-->
+        <div  class="col-md-6">
             <button class="btn btn-lg btn-block">vendedor</button>
         </div>
-        <div  class="col-md-4">
-            <button class="btn btn-lg btn-block">administrador</button>
+        <div  class="col-md-6">
+            <button class="btn btn-lg btn-block" ng-click="adminLogin()">administrador</button>
         </div>
     </div>
 <form name="myForm" class="form-signin">
@@ -17,12 +17,12 @@
     <input id="inputEmail" name="email" ng-model="email" class="form-control" placeholder="Email address"  autofocus="" type="email"  required>
     <label for="inputPassword" class="sr-only">Password</label>
     <input id="inputPassword" ng-model="passwd" class="form-control" placeholder="Password"  type="password" name="pass" required="">
-    <div class="checkbox">
+    <!--div class="checkbox">
       <label>
         <input value="remember-me" type="checkbox"> Recordarme
       </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit"  ng-disabled="myForm.pass.$dirty && myForm.pass.$invalid ||
+    </div-->
+    <button class="btn btn-lg btn-primary btn-block" type="submit" sng-disabled="myForm.pass.$dirty && myForm.pass.$invalid ||
   myForm.email.$dirty && myForm.email.$invalid" ng-click="loguear()">Sign in</button>
 </form>
 </div>
