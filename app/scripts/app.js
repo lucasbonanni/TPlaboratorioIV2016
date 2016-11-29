@@ -25,6 +25,8 @@ angular
     $authProvider.tokenName = 'MiTokenGeneradoEnPHP';
     $authProvider.tokenPrefix = 'Aplicacion';
     $authProvider.tokenHeader = 'data';
+    $authProvider.storageType = 'localStorage';
+    $authProvider.withCredentials = false;
 
     $stateProvider
     .state('main', {
@@ -59,9 +61,14 @@ angular
     })
     $urlRouterProvider.otherwise('/');
   })
-  .run(function ($rootScope, $location, servicioLogin,permisosFactory) {
+  .run(function ($rootScope, $location, servicioLogin,permisosFactory,$auth) {
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams, options) {
-            
+            permisosFactory.getPayload();
+            $rootScope.isAdministrator = permisosFactory.isAdministrator();
+            $rootScope.isUser = permisosFactory.isUser();
+            console.info("state change isAdmin",permisosFactory.isAdministrator());
+            console.info("state change isAuthenticated",$auth.isAuthenticated());
+
             if(servicioLogin.isAuthenticated()){
               
               //get payload of authFactory
