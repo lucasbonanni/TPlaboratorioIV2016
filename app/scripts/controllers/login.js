@@ -14,6 +14,11 @@ angular.module('tplaboratorioIv2016App')
 
     $scope.adminLogin = function() {
     	    $scope.passwd = 'miclave';
+    		$scope.email = 'lucas@test.com';
+    };
+
+     $scope.userLogin = function() {
+    	    $scope.passwd = 'miclave';
     		$scope.email = 'lucas@12315test.com';
     };
 
