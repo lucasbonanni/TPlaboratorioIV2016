@@ -7,9 +7,9 @@ angular
 
 	var data = {};
 
-	var object ={};
+	var object = {};
 
-	var elmentToEdit ={};
+	var elementToEdit = {};
 
 	function setService(serv) {
 		service = serv;
@@ -20,8 +20,9 @@ angular
 	};
 
 	function obtenerTodos() {
-		return service.TraerTodasLasPersonas().then(function(respuesta){
+		return service.obtenerTodos().then(function(respuesta){
 			data = respuesta.data;
+			elementToEdit = {};
 			return  respuesta;
 		},function(error) {
 			console.info(error);
@@ -32,17 +33,28 @@ angular
 	function borrarElemento(index) {
 		var element = data[index];
 		console.info('element',element);
-		service.BorrarPersona(element.id).then(function(rta){
+		elementToEdit = {};
+		service.BorrarPorId(element.id).then(function(rta){
 			console.info(rta);
 			console.info("index",index);
 			if (index > -1) {
-			    $scope.grilla.datos.splice(index, 1);
+			    data.splice(index, 1);
 			}
 		},function(error){
 			console.info(error);
 		});
 	};
 
+	function editarElemento(argument) {
+		elementToEdit = argument;
+	};
+
+	function getEditElement() {
+		return elementToEdit;
+	};
+
+	object.getEditElement = getEditElement;
+	object.editarElemento = editarElemento;
 	object.setService = setService;
 	object.getData = getData;
 	object.obtenerTodos = obtenerTodos;
