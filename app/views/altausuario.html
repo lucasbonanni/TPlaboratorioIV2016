@@ -1,36 +1,36 @@
 <div class="row">
 	<div class="col-md-4"></div>
-	<div class="col-md-4"><center><h3>Alta Usuario</h3></center></div>
+	<div class="col-md-4"><center><h3>{{ title }}</h3></center></div>
 </div>
 <dir class="row">
-<form>
+<form name="userFrm">
   <div class="form-group">
     <label for="formGroupNombre">Nombre</label>
-    <input class="form-control" id="Nombre" placeholder="Nombre" type="text">
+    <input class="form-control"  placeholder="Nombre" type="text" name="nombre" ng-model="persona.nombre" required="">
   </div>
   <div class="form-group">
     <label for="formGroupApellido">Apellido</label>
-    <input class="form-control" id="Apellido" placeholder="Apellido" type="text">
+    <input class="form-control" placeholder="Apellido" type="text" name="apellido" ng-model="persona.apellido" required="">
   </div>
     <div class="form-group">
     <label for="formGroupEmail">E-mail</label>
-    <input class="form-control" id="email" placeholder="ingrese el mail" type="email">
+    <input class="form-control"  placeholder="ingrese el mail" type="email" name="mail" ng-model="persona.mail" required="">
   </div>
    </div>
     <div class="form-group">
     <label for="formGroupPassword">Contraseña</label>
-    <input class="form-control" id="password" placeholder="ingrese el password" type="password">
+    <input class="form-control" placeholder="ingrese el password" name="clave" type="password" ng-model="persona.clave" minlength="5" required="">
   </div>
   <div class="form-group">
   <label for="formGroupPerfil">Perfil</label>
-	  <select class="form-control">
-		  <option value="c">Comprador</option>
-		  <option value="v">Vendedor</option>
-		  <option value="a">Administrador</option>
+	  <select class="form-control" data-ng-model="persona.perfil">
+		  <option value="C">Comprador</option>
+		  <option value="V">Vendedor</option>
+		  <option value="A">Administrador</option>
 		</select>
 	</div>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar usuario</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="accionBoton()" ng-disabled="((userFrm.nombre.$dirty || userFrm.nombre.$untouched) && userFrm.nombre.$invalid) || (userFrm.apellido.$untouched &&  userFrm.apellido.$invalid) || ( userFrm.mail.$untouched && userFrm.mail.$invalid) || (userFrm.clave.$dirty &&  userFrm.clave.$invalid)">{{ textButton }}</button>
 </form>
 
 </dir>
