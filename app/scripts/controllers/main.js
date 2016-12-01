@@ -8,55 +8,30 @@
  * Controller of the tplaboratorioIv2016App
  */
 angular.module('tplaboratorioIv2016App')
-  .controller('MainCtrl', function ($scope,productos,$cookies) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    
-    $cookies.put('unvalor','valor');
+  .controller('MainCtrl', function ($scope,productos,permisosFactory,dataFactory,$location) {
 
-    console.info("valor de la cookie -",$cookies.get('unvalor'));
+    dataFactory.setService(productos);
 
-    $scope.grilla = {};
+	$scope.grilla = {};
 
-	$scope.grilla.columnas = ['nombre','apellido','mail'];
+	$scope.grilla.columnas = ['id','nombre','descripcion','precio'];
 
-	productos.TraerTodosLosProductos().then(function(rta){
-		console.info(rta.data);
-		$scope.grilla.datos = rta.data;
-	},function(error){
-		console.info("error",error);
-	});
+	dataFactory.obtenerTodos().then(function(respuesta){
+        $scope.grilla.datos = dataFactory.getData();
+    });
 
 
-	$scope.borrar =function(id)
+	$scope.borrar =function(index)
 	{
-		productos.BorrarProducto(id).then(function(rta){
-			console.info(rta);
-		},function(error){
-			console.info(error);
-		});
+		dataFactory.borrarElemento(index);
 	};
 
 
-	/*$scope.grilla.datos = [
-		{
-			'nombre': 'lucas',
-			'apellido': 'bonanni',
-			'mail': 'asdf@bonanni.com'
-		},
-		{
-			'nombre': 'pedro',
-			'apellido': 'asdflasdf',
-			'mail': 'asdf@bonanni.com'
-		},
-		{
-			'nombre': 'manuel',
-			'apellido': 'suarez',
-			'mail': 'asdf@bonanni.com'
-		}
-	];*/
+    $scope.editarProducto = function(producto) {
+        dataFactory.editarElemento(producto);
+        //console.info("producto",producto);
+        $location.path('/altaProducto').search({id: producto.id });
+    }
+
 	
   });

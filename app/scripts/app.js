@@ -50,7 +50,7 @@ angular
         controller: 'UsuariosCtrl'
     })
     .state('altaProducto', {
-        url:'/altaProducto',
+        url:'/altaProducto?id',
         templateUrl: 'views/altaproducto.html',
         controller: 'AltaproductoCtrl'
       })

@@ -1,26 +1,33 @@
 angular
   .module('tplaboratorioIv2016App')
-  .service('productos', function ($http) {
+  .constant('productsPath','productos')
+  .service('productos', function ($http,routeFactory,productsPath) {
 
-  	this.TraerTodosLosProductos = function(){
-  		return $http.get('http://localhost:8080/personaSlim/ws1/productos');
+  	this.obtenerTodos = function(){
+
+      var url = routeFactory.getApiRoute(productsPath);
+  		return $http.get(url);
   	};
 
 
-  	this.TraerUnaProducto = function(id){
-  		return $http.get('http://localhost:8080/personaSlim/ws1/productos/'+ id);
+  	this.BuscarPorId = function(id){
+		var url = routeFactory.getApiRoute(productsPath,id);
+        return $http.get(url);
   	};
 
-  	this.BorrarProducto = function(id){
-  		return $http.delete('http://localhost:8080/personaSlim/ws1/productos/'+ id);
+  	this.BorrarPorId = function(id){
+  	     var url = routeFactory.getApiRoute(productsPath,id);
+         return $http.delete(url);
   	};
 
-  	this.ModificarProducto = function(usuario){
-  		return $http.put('http://localhost:8080/personaSlim/ws1/productos/',usuario);
+  	this.Modificar = function(producto){
+  		var url = routeFactory.getApiRoute(productsPath);
+        return $http.put(url,producto);
   	};
 
-  	this.InsertarProducto = function(usuario){
-  		return $http.post('http://localhost:8080/personaSlim/ws1/productos/',usuario);
+  	this.Agregar = function(producto){
+  		var url = routeFactory.getApiRoute(productsPath);
+        return $http.post(url,producto);
   	};
 
 
