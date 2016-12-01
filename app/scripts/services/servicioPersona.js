@@ -5,29 +5,29 @@ angular
   .constant('actionPath','usuarios')
   .service('personas', function ($http,routeFactory,actionPath) {
 
-  	this.TraerTodasLasPersonas = function(){
+  	this.obtenerTodos = function(){
       var url = routeFactory.getApiRoute(actionPath);
-      console.info("url",url);
+      //console.info("url",url);
   		return $http.get(url);
   	};
 
 
-  	this.TraerUnaPersona = function(id){
+  	this.BuscarPorId = function(id){
       var url = routeFactory.getApiRoute(actionPath,id);
   		return $http.get(url);
   	};
 
-  	this.BorrarPersona = function(id){
+  	this.BorrarPorId = function(id){
       var url = routeFactory.getApiRoute(actionPath,id);
   		return $http.delete(url);
   	};
 
-  	this.ModificarPersona = function(usuario){
+  	this.Modificar = function(usuario){
       var url = routeFactory.getApiRoute(actionPath);
   		return $http.put(url,usuario);
   	};
 
-  	this.InsertarPersona = function(usuario){
+  	this.Agregar = function(usuario){
       var url = routeFactory.getApiRoute(actionPath);
   		return $http.post(url,usuario);
   	};
