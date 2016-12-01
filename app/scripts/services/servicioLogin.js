@@ -9,7 +9,11 @@ angular
   	this.doLogin = function(user, password){
   		user.mail = 'lucas@test.com';
   		user.clave = 'miclave';
-  		return $auth.login(user);
+  		return $auth.login(user).then(function(respuesta){
+            return respuesta;
+        }, function(error){
+            return error;
+        });
   	};
 
   	this.authenticate = function(name, [userData]){
