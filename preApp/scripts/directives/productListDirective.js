@@ -7,20 +7,20 @@
  * # MainCtrl
  * Controller of the tplaboratorioIv2016App
  */
- angular.module('tplaboratorioIv2016App')
-   .directive('productList', function (){
+angular.module('tplaboratorioIv2016App')
+  .directive('productList', function() {
 
-     return{
-       restrict: 'A',
-       scope:{
-         products:'='
-         title:'@'
-       },
-       replace: true,
-       templateUrl:'templates/productList.html',
-       link: function( scope, elements, attrs, ctrl){
+    return {
+      restrict: 'A',
+      scope: {
+        products: '=',
+        title: '@'
+      },
+      replace: true,
+      templateUrl: 'templates/productList.html',
+      link: function(scope, elements, attrs, ctrl) {
 
-       }
-     }
+      }
+    }
 
-   });
+  });
