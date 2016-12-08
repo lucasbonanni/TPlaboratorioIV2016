@@ -32,17 +32,32 @@ angular
     .state('main', {
       url:'/',
       templateUrl: 'views/shop/home.html',
-      controller: 'MainCtrl'
+      controller: 'HomeCtrl'
     })
-    .state('productos', {
-      url:'/productos',
-      templateUrl: 'views/productos.html',
-      controller: 'ProductosCtrl'
+    .state('product', {
+      url:'/product_detail',
+      templateUrl: 'views/shop/product.html',
+      controller: 'ProductCtrl'
     })
-    .state('login', {
+    .state('productSummary', {
+      url:'/product_summary',
+      templateUrl: 'views/shop/product_summary.html',
+      controller: 'ProductSummaryCtrl'
+    })
+    /*.state('login', {
         url:'/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
+    })*/
+    .state('register',{
+        url:'/register',
+        templateUrl: 'views/shop/register.html',
+        controller: 'RegisterCtrl'
+    })
+    .state('contact',{
+        url:'/contact',
+        templateUrl: 'views/shop/contact.html',
+        controller: 'ContactCtrl'
     })
     .state('usuarios',{
         url:'/usuarios',
