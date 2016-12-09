@@ -69,7 +69,6 @@ angular.module('tplaboratorioIv2016App')
     }];
 
     $scope.agregarAlCarrito = function(element) {
-      //alert('test');
       console.info(element);
     };
 
