@@ -14,7 +14,8 @@ angular.module('tplaboratorioIv2016App')
       restrict: 'A',
       scope: {
         products: '=',
-        title: '@'
+        title: '@',
+        addtocart: '&'
       },
       replace: true,
       templateUrl: 'templates/productList.html',
