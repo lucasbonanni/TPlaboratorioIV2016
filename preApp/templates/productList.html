@@ -3,7 +3,7 @@
   <ul class="thumbnails">
     <li class="span3" ng-repeat="product in products">
       <div class="thumbnail">
-        <a href="product_details.html"><img ng-src="{{product.image}}" alt="" /></a>
+        <a ui-sref="product({id:product.id})"><img ng-src="{{product.image}}" alt="" /></a>
         <div class="caption">
           <h5>{{product.name}}</h5>
           <p>
@@ -11,7 +11,7 @@
           </p>
 
           <h4 style="text-align:center">
-            <a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a>
+            <a class="btn" ui-sref="product({id:product.id})"> <i class="icon-zoom-in"></i></a>
             <a class="btn" ng-click="addtocart({element:product})">Add to <i class="icon-shopping-cart"></i></a>
             <a class="btn btn-primary" href="#">{{product.price}}</a>
           </h4>

@@ -35,7 +35,7 @@ angular
       controller: 'HomeCtrl'
     })
     .state('product', {
-      url:'/product_detail',
+      url:'/product_detail?id',
       templateUrl: 'views/shop/product.html',
       controller: 'ProductCtrl'
     })
