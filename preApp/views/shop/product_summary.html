@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="span9">
-        <h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
+        <h3>  SHOPPING CART [ <small>{{ storedValues.length }} Item(s) </small>]<a class="btn btn-large pull-right" ui-sref="main"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
         <hr class="soft" />
-        <table class="table table-bordered">
+        <table class="table table-bordered" ng-if="!isloged">
           <tr>
             <th> I AM ALREADY REGISTERED </th>
           </tr>
@@ -51,60 +51,48 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
-              <td>MASSA AST<br/>Color : black, Material : metal</td>
+            <tr ng-if="carrito.length > 0" ng-repeat="product in carrito">
+              <td> <img width="60" ng-src="{{product.image}}" alt="" /></td>
+              <td>{{product.description}}</td>
               <td>
-                <div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button>
-                  <button
-                      class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>
+                <div class="input-append">
+                  <input class="span1" style="max-width:34px" placeholder="{{product.quantity}}" id="appendedInputButtons" size="16" type="text">
+                  <button class="btn" type="button" ng-click="decrease(product.id)">
+                    <i class="icon-minus"></i>
+                  </button>
+                  <button class="btn" type="button" ng-click="increase(product)">
+                    <i class="icon-plus"></i>
+                  </button>
+                  <button class="btn btn-danger" type="button" ng-click="delete(product.id)">
+                    <i class="icon-remove icon-white"></i>
+                  </button>
                 </div>
               </td>
-              <td>$120.00</td>
-              <td>$25.00</td>
-              <td>$15.00</td>
-              <td>$110.00</td>
+              <td>$ {{product.price | number:2}}</td>
+              <td>$ {{discount | number:2}}</td>
+              <td>$ {{tax | number:2}}</td>
+              <td>$ {{(product.quantity * (product.price - discount)) * tax | number:2 }}</td>
             </tr>
-            <tr>
-              <td> <img width="60" src="themes/images/products/8.jpg" alt="" /></td>
-              <td>MASSA AST<br/>Color : black, Material : metal</td>
-              <td>
-                <div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger"
-                      type="button"><i class="icon-remove icon-white"></i></button> </div>
+            <tr ng-if="carrito == null || carrito.length == 0">
+              <td colspan="7">
+                <strong><center> No items to show </center></strong>
               </td>
-              <td>$7.00</td>
-              <td>--</td>
-              <td>$1.00</td>
-              <td>$8.00</td>
             </tr>
-            <tr>
-              <td> <img width="60" src="themes/images/products/3.jpg" alt="" /></td>
-              <td>MASSA AST<br/>Color : black, Material : metal</td>
-              <td>
-                <div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger"
-                      type="button"><i class="icon-remove icon-white"></i></button> </div>
-              </td>
-              <td>$120.00</td>
-              <td>$25.00</td>
-              <td>$15.00</td>
-              <td>$110.00</td>
-            </tr>
-
             <tr>
               <td colspan="6" style="text-align:right">Total Price: </td>
-              <td> $228.00</td>
+              <td> $ {{totalPrice | number:2}}</td>
             </tr>
             <tr>
               <td colspan="6" style="text-align:right">Total Discount: </td>
-              <td> $50.00</td>
+              <td> $ {{totalDiscount | number:2}}</td>
             </tr>
             <tr>
               <td colspan="6" style="text-align:right">Total Tax: </td>
-              <td> $31.00</td>
+              <td> $ {{totalTax | number:2}}</td>
             </tr>
             <tr>
-              <td colspan="6" style="text-align:right"><strong>TOTAL ($228 - $50 + $31) =</strong></td>
-              <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
+              <td colspan="6" style="text-align:right"><strong>TOTAL ($ {{totalPrice |number:2}} - $ {{totalDiscount | number:2}} + ${{totalTax | number:2}}) =</strong></td>
+              <td class="label label-important" style="display:block"> <strong> $ {{totalPrice -  totalDiscount + totalTax | number:2}} </strong></td>
             </tr>
           </tbody>
         </table>
@@ -157,8 +145,8 @@
             </td>
           </tr>
         </table>
-        <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-        <a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+        <a class="btn btn-large" ui-sref="main"><i class="icon-arrow-left"></i> Continue Shopping </a>
+        <a href="login.html" class="btn btn-large pull-right" ng-disabled="true">Next <i class="icon-arrow-right"></i></a>
 
       </div>
     </div>
