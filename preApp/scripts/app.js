@@ -44,11 +44,11 @@ angular
       templateUrl: 'views/shop/product_summary.html',
       controller: 'ProductSummaryCtrl'
     })
-    /*.state('login', {
+    .state('login', {
         url:'/login',
-        templateUrl: 'views/login.html',
+        templateUrl: 'views/shop/login.html',
         controller: 'LoginCtrl'
-    })*/
+    })
     .state('register',{
         url:'/register',
         templateUrl: 'views/shop/register.html',
