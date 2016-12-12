@@ -10,48 +10,87 @@
 
 angular.module('tplaboratorioIv2016App')
   .controller('HomeCtrl', function($scope, $cookies) {
-    var carrito = [];
-    var storeValues = $cookies.getObject('carrito');
-    if(storeValues != null){
-      carrito = storeValues;
+    $scope.carrito = [];
+    $scope.totalPrice = 0;
+    $scope.groupFilter = {};
+    console.info($scope.groupFilter);
+    $scope.storedValues = $cookies.getObject('carrito');
+    if ($scope.storedValues != null) {
+      $scope.carrito = $scope.storedValues;
+      $scope.totalPrice = buildOrder($scope.storedValues);
     }
+
+
+    function buildOrder(array) {
+      var arrayOrdenado = [];
+      $scope.totalPrice = 0;
+      if (array.length > 0) {
+        for (var i = 0; i < array.length; i++) {
+          var found = false;
+          if (i == 0) {
+            array[i].quantity = 1;
+            arrayOrdenado.push(array[i]);
+          } else {
+            for (var j = 0; j < arrayOrdenado.length; j++) {
+              if (array[i].id == arrayOrdenado[j].id) {
+                arrayOrdenado[j].quantity++;
+                found = true;
+              }
+            }
+            if (!found) {
+              array[i].quantity = 1;
+              arrayOrdenado.push(array[i]);
+            }
+          }
+          $scope.totalPrice += parseInt(array[i].price) * 1.21;
+        }
+        console.info("totalprice", $scope.totalPrice);
+        return $scope.totalPrice;
+      }
+    };
 
     $scope.productList = [{
       'id': '1',
       'name': 'Product name 1',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/6.jpg'
+      'image': 'styles/shop/themes/images/products/6.jpg',
+      'group': 'memory'
     }, {
       'id': '2',
       'name': 'Product name 2',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/7.jpg'
+      'image': 'styles/shop/themes/images/products/7.jpg',
+      'group': 'pendrive'
     }, {
       'id': '3',
       'name': 'Product name 3',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/8.jpg'
+      'image': 'styles/shop/themes/images/products/8.jpg',
+      'group': 'memory'
     }, {
       'id': '4',
       'name': 'Product name 4',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/9.jpg'
+      'image': 'styles/shop/themes/images/products/9.jpg',
+      'group': 'camera'
     }, {
       'id': '5',
       'name': 'Product name 5',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/10.jpg'
+      'image': 'styles/shop/themes/images/products/10.jpg',
+      'group': 'memory'
     }, {
       'id': '6',
       'name': 'Product name 6',
       'description': 'Lorem Ipsum is simply dummy text',
       'price': '222',
-      'image': 'styles/shop/themes/images/products/11.jpg'
+      'image': 'styles/shop/themes/images/products/11.jpg',
+      'group': 'camera'
     }];
 
     $scope.carouselImages = [{
@@ -80,13 +119,24 @@ angular.module('tplaboratorioIv2016App')
       'description': 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'
     }];
 
+    $scope.setFilter = function () {
+      $scope.groupFilter = { 'group':'memory'};
+      console.info($scope.groupFilter);
+    };
+
     $scope.agregarAlCarrito = function(element) {
-      console.info(element);
-      carrito.push(element);
+      $scope.carrito.push(element);
       var expireDate = new Date();
       expireDate.setDate(expireDate.getDate() + 1);
       // Setting a cookie
-      $cookies.putObject('carrito', carrito, {'expires': expireDate});
+      $cookies.putObject('carrito', $scope.carrito, {
+        'expires': expireDate
+      });
+      buildOrder($scope.carrito);
     };
+
+
+
+
 
   });

@@ -15,12 +15,13 @@ angular.module('tplaboratorioIv2016App')
       scope: {
         products: '=',
         title: '@',
-        addtocart: '&'
+        addtocart: '&',
+        groupfilter: '='
       },
       replace: true,
       templateUrl: 'templates/productList.html',
       link: function(scope, elements, attrs, ctrl) {
-
+        console.info("directive",scope.groupfilter);
       }
     }
 
