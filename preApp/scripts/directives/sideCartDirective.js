@@ -13,23 +13,17 @@ angular.module('tplaboratorioIv2016App')
     return {
       restrict: 'A',
       scope: {
-        products: '='
+        products: '=',
+        totalprice: '@'
       },
       templateUrl: 'templates/sideCart.html',
       link: function(scope, elements, attrs, ctrl) {
-        function suma(items) {
-          var total = 0;
-          for (var i = 0; i < items.length; i++) {
-            total += parseInt(items[i].price);
-          }
-          return total;
-        };
 
-        if (scope.products.length > 0) {
-          scope.totalPrice = suma(scope.products);
+
+        if (scope.products != null && scope.products.length > 0) {
           scope.text = 'Items in your cart';
         } else {
-          scope.totalPrice = 0;
+          scope.totalprice = 0;
           scope.text = 'No Items in your cart';
         }
 
