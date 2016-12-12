@@ -10,5 +10,5 @@
 
  angular.module('tplaboratorioIv2016App')
    .controller('LoginCtrl', function ($scope){
-
+     $scope.email = '';
    });

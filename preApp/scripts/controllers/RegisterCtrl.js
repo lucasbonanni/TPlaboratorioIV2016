@@ -8,7 +8,10 @@
  * Controller of the tplaboratorioIv2016App
  */
 
- angular.module('tplaboratorioIv2016App')
-   .controller('RegisterCtrl', function ($scope){
+angular.module('tplaboratorioIv2016App')
+  .controller('RegisterCtrl', function($scope) {
+    if ($stateParams.mail) {
+      var email = $stateParams.id;
+    }
 
-   });
+  });

@@ -17,11 +17,11 @@
                 <div class="control-group">
                   <label class="control-label" for="inputEmail0">E-mail address</label>
                   <div class="controls">
-                    <input class="span3" type="text" id="inputEmail0" placeholder="Email">
+                    <input class="span3" type="text" id="inputEmail0" placeholder="Email" ng-model="email">
                   </div>
                 </div>
                 <div class="controls">
-                  <button type="submit" class="btn block">Create Your Account</button>
+                  <button type="submit" class="btn block" ui-sref="register({mail:email})">Create Your Account</button>
                 </div>
               </form>
             </div>

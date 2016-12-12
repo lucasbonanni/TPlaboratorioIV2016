@@ -50,7 +50,7 @@ angular
         controller: 'LoginCtrl'
       })
       .state('register', {
-        url: '/register',
+        url: '/register?mail',
         templateUrl: 'views/shop/register.html',
         controller: 'RegisterCtrl'
       })
