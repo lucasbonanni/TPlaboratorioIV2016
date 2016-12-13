@@ -16,7 +16,7 @@ angular.module('tplaboratorioIv2016App')
         products: '=',
         totalprice: '@'
       },
-      templateUrl: 'templates/sideCart.html',
+      templateUrl: 'shop/templates/sideCart.html',
       link: function(scope, elements, attrs, ctrl) {
 
 

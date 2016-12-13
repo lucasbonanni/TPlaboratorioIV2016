@@ -16,7 +16,7 @@ angular.module('tplaboratorioIv2016App')
         imageslist: '='
       },
       replace: true,
-      templateUrl: 'templates/Carousel.html',
+      templateUrl: 'shop/templates/Carousel.html',
       link: function(scope, elements, attrs, ctrl) {
 
       }

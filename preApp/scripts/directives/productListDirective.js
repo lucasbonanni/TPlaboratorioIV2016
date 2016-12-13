@@ -19,7 +19,7 @@ angular.module('tplaboratorioIv2016App')
         groupfilter: '='
       },
       replace: true,
-      templateUrl: 'templates/productList.html',
+      templateUrl: 'shop/templates/productList.html',
       link: function(scope, elements, attrs, ctrl) {
         console.info("directive",scope.groupfilter);
       }

@@ -17,7 +17,7 @@
          title:'@'
        },
        replace: true,
-       templateUrl:'templates/productsCarousel.html',
+       templateUrl:'shop/templates/productsCarousel.html',
        link: function( scope, elements, attrs, ctrl){
 
        }

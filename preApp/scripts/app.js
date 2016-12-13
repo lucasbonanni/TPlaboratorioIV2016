@@ -29,35 +29,83 @@ angular
     $authProvider.withCredentials = false;
 
     $stateProvider
-      .state('main', {
+    // .state('main', {
+    //   url: '/',
+    //   templateUrl: 'views/shop/home.html',
+    //   controller: 'HomeCtrl'
+    // })
+      .state('shop', {
+        // url:'/shop',
+        abstract: true,
+        templateUrl: 'shop/index.html',
+      })
+      .state('shop.home', {
         url: '/',
-        templateUrl: 'views/shop/home.html',
-        controller: 'HomeCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/home.html',
+            controller: 'HomeCtrl'
+          }
+        }
       })
-      .state('product', {
+      .state('shop.product', {
         url: '/product_detail?id',
-        templateUrl: 'views/shop/product.html',
-        controller: 'ProductCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/product.html',
+            controller: 'ProductCtrl'
+          }
+        }
       })
-      .state('productSummary', {
+      .state('shop.productSummary', {
         url: '/product_summary',
-        templateUrl: 'views/shop/product_summary.html',
-        controller: 'ProductSummaryCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/product_summary.html',
+            controller: 'ProductSummaryCtrl'
+          }
+        }
       })
-      .state('login', {
+      .state('shop.login', {
         url: '/login',
-        templateUrl: 'views/shop/login.html',
-        controller: 'LoginCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/login.html',
+            controller: 'LoginCtrl'
+          }
+        }
       })
-      .state('register', {
+      .state('shop.register', {
         url: '/register?mail',
-        templateUrl: 'views/shop/register.html',
-        controller: 'RegisterCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/register.html',
+            controller: 'RegisterCtrl'
+          }
+        }
       })
-      .state('contact', {
+      .state('shop.contact', {
         url: '/contact',
-        templateUrl: 'views/shop/contact.html',
-        controller: 'ContactCtrl'
+        views: {
+          contenido: {
+            templateUrl: 'shop/views/contact.html',
+            controller: 'ContactCtrl'
+          }
+        }
+      })
+      .state('admin', {
+        url: '/admin',
+        abstract: true,
+        templateUrl: 'admin/views/index.html',
+      })
+      .state('admin.dashboard', {
+        url: '/dashboard',
+        views: {
+          contenido: {
+            templateUrl: 'admin/views/dashboard.html',
+            controller: 'principalCtrl'
+          }
+        }
       })
       .state('usuarios', {
         url: '/usuarios',
