@@ -94,12 +94,12 @@ angular
         }
       })
       .state('admin', {
-        url: '/admin',
+        // url: '/admin',
         abstract: true,
-        templateUrl: 'admin/views/index.html',
+        templateUrl: 'admin/index.html',
       })
       .state('admin.dashboard', {
-        url: '/dashboard',
+        url: '/admin/dashboard',
         views: {
           contenido: {
             templateUrl: 'admin/views/dashboard.html',
