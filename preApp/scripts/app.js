@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'satellizer',
-    'ui.router'
+    'ui.router',
+    'ui.grid'
   ])
   .config(function($authProvider, $stateProvider, $urlRouterProvider) {
     $authProvider.baseUrl = 'http://localhost'
@@ -104,6 +105,15 @@ angular
           contenido: {
             templateUrl: 'admin/views/dashboard.html',
             controller: 'principalCtrl'
+          }
+        }
+      })
+      .state('admin.products', {
+        url: '/admin/products',
+        views: {
+          contenido: {
+            templateUrl: 'admin/views/products.html',
+            controller: 'productsCtrl'
           }
         }
       })
