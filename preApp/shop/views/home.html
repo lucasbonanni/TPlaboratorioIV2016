@@ -3,10 +3,10 @@
 	<div class="container" style="border-top: white; border-top-style: solid; border-top-width: thin;  padding-top: 5px;">
 		<div class="row">
 			<!-- Sidebar ================================================== -->
-			<div id="sidebar" class="hidden-xs hidden-sm col-md-3">
+			<div id="sidebar" class="col-md-3">
 				<div class="well well-small" side-cart products="storedValues" totalprice="{{totalPrice}}">
 				</div>
-				<div class="panel-group">
+				<!-- <div class="panel-group">
 				    <div class="panel panel-default">
 				        <div class="panel-heading">
 				            <h4 class="panel-title">Filtro 1</h4>
@@ -18,26 +18,96 @@
 				            <li><a href=""   ng-click="groupFilter = { 'group':'pendrive'}"> Memories Sticks <span class="badge pull-right">14</span></li>
 				        </ul>
 				    </div>
+				</div> -->
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingOne">
+						<h4 class="panel-title">
+				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseaAll" aria-expanded="true" aria-controls="collapseOne">
+				          Filtros
+				        </a>
+				      </h4>
+					</div>
+					<div id="collapseaAll" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							<div class="panel panel-info">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				          Filtro #1
+				        </a>
+				      </h4>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+									<div class="list-group">
+										<a href="#" class="list-group-item" ng-click="groupFilter = {}"> All <span class="badge ">14</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'memory'}"> Memories <span class="badge ">14</span> </a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'camera'}">Cameras <span class="badge ">14</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'pendrive'}"> Memories Sticks <span class="badge ">14</span></a>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-info">
+								<div class="panel-heading" role="tab" id="headingTwo">
+									<h4 class="panel-title">
+				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				          Filtro #2
+				        </a>
+				      </h4>
+								</div>
+								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+									<div class="list-group">
+										<a href="#" class="list-group-item active">Cras justo odio</a>
+										<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+										<a href="#" class="list-group-item">Morbi leo risus</a>
+										<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+										<a href="#" class="list-group-item">Vestibulum at eros</a>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-info">
+								<div class="panel-heading" role="tab" id="headingThree">
+									<h4 class="panel-title">
+				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				          Filtro #3
+				        </a>
+				      </h4>
+								</div>
+								<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+									<div class="list-group">
+										<a href="#" class="list-group-item active">
+				    Cras justo odio
+				  </a>
+										<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+										<a href="#" class="list-group-item">Morbi leo risus</a>
+										<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+										<a href="#" class="list-group-item">Vestibulum at eros</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<br/>
-				<div class="thumbnail">
-					<img src="shop/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
-					<div class="caption">
-						<h5>Panasonic</h5>
-						<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				</div><br/>
-				<div class="thumbnail">
-					<img src="shop/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
-					<div class="caption">
-						<h5>Kindle</h5>
-						<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				</div><br/>
-				<div class="thumbnail">
-					<img src="shop/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
-					<div class="caption">
-						<h5>Payment Methods</h5>
+				<div class="hidden-xs hidden-sm">
+					<div class="thumbnail">
+						<img src="shop/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
+						<div class="caption">
+							<h5>Panasonic</h5>
+							<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+						</div>
+					</div><br/>
+					<div class="thumbnail">
+						<img src="shop/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
+						<div class="caption">
+							<h5>Kindle</h5>
+							<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+						</div>
+					</div><br/>
+					<div class="thumbnail">
+						<img src="shop/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
+						<div class="caption">
+							<h5>Payment Methods</h5>
+						</div>
 					</div>
 				</div>
 			</div>
