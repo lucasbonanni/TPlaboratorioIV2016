@@ -1,43 +1,41 @@
 <div carousel-principal imageslist="carouselImages"> </div>
 <div id="mainBody">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<div class="container">
+	<div class="container" style="border-top: white; border-top-style: solid; border-top-width: thin;  padding-top: 5px;">
 		<div class="row">
 			<!-- Sidebar ================================================== -->
-			<div id="sidebar" class="col-md-3">
+			<div id="sidebar" class="hidden-xs hidden-sm col-md-3">
 				<div class="well well-small" side-cart products="storedValues" totalprice="{{totalPrice}}">
-
 				</div>
-				<div class="list-group">
-						<a href="" class="list-group-item"  ng-click="groupFilter = {}"> All <span class="badge">14</span></a>
-						<a href="" class="list-group-item"  ng-click="groupFilter = { 'group':'memory'}"> Memories <span class="badge">14</span> </a>
-						<a href="" class="list-group-item"  ng-click="groupFilter = { 'group':'camera'}">Cameras <span class="badge">14</span></a>
-						<a href="" class="list-group-item"  ng-click="groupFilter = { 'group':'pendrive'}"> Memories Sticks <span class="badge">14</span></a>
+				<div class="panel-group">
+				    <div class="panel panel-default">
+				        <div class="panel-heading">
+				            <h4 class="panel-title">Filtro 1</h4>
+				        </div>
+				        <ul class="nav nav-pills nav-stacked">
+				            <li><a href=""   ng-click="groupFilter = {}"> All <span class="badge pull-right">14</span></a></li>
+				            <li><a href=""   ng-click="groupFilter = { 'group':'memory'}"> Memories <span class="badge pull-right">14</span> </a></li>
+				            <li><a href=""   ng-click="groupFilter = { 'group':'camera'}">Cameras <span class="badge pull-right">14</span></a></li>
+				            <li><a href=""   ng-click="groupFilter = { 'group':'pendrive'}"> Memories Sticks <span class="badge pull-right">14</span></li>
+				        </ul>
+				    </div>
 				</div>
 				<br/>
 				<div class="thumbnail">
-					<img src="styles/shop/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
+					<img src="shop/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
 					<div class="caption">
 						<h5>Panasonic</h5>
 						<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				</div><br/>
 				<div class="thumbnail">
-					<img src="styles/shop/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
+					<img src="shop/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
 					<div class="caption">
 						<h5>Kindle</h5>
 						<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				</div><br/>
 				<div class="thumbnail">
-					<img src="styles/shop/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
+					<img src="shop/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
 					<div class="caption">
 						<h5>Payment Methods</h5>
 					</div>
