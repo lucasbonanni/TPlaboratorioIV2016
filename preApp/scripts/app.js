@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'satellizer',
     'ui.router',
-    'ui.grid'
+    'ui.grid',
+    'ui.bootstrap',
+	'angularFileUpload'
   ])
   .config(function($authProvider, $stateProvider, $urlRouterProvider) {
     $authProvider.baseUrl = 'http://localhost'
