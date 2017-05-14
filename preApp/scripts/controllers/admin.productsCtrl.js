@@ -32,9 +32,6 @@ angular.module('tplaboratorioIv2016App')
            url: 'http://localhost/personaSlim/ws1/images'
 	 });
 	   
-	 console.info('file upload',uploader);
-	
-	
 	
 	/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*/
 	 
@@ -50,7 +47,7 @@ angular.module('tplaboratorioIv2016App')
 
         // CALLBACKS
 
-        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+/*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
 		};
         uploader.onAfterAddingFile = function(fileItem) {
@@ -82,7 +79,7 @@ angular.module('tplaboratorioIv2016App')
         };
         uploader.onCompleteAll = function() {
             console.info('onCompleteAll');
-        };
+        };*/
 
 
   });
