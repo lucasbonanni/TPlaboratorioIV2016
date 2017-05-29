@@ -2364,7 +2364,7 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
 .dropdown-toggle:active, .open .dropdown-toggle {
   outline: 0
 }
-
+/*
 .caret {
   display: inline-block;
   width: 0;
@@ -2379,7 +2379,7 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
 .dropdown .caret {
   margin-top: 8px;
   margin-left: 2px
-}
+}*/
 
 .dropdown-menu {
   position: absolute;
@@ -3183,10 +3183,10 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
   background-color: #222
 }
 
-.btn .caret {
+/*.btn .caret {
   margin-top: 8px;
   margin-left: 0
-}
+}*/
 
 .btn-mini .caret, .btn-small .caret, .btn-large .caret {
   margin-top: 6px
