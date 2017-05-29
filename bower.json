@@ -35,7 +35,7 @@
     "angular-animate": "latest",
     "angular-touch": "latest",
     "angular-sanitize": "latest",
-	"angular-file-upload":"latest",
-	"angular-ui-grid":"latest"
+    "angular-file-upload": "latest",
+    "angular-ui-grid": "latest"
   }
 }
