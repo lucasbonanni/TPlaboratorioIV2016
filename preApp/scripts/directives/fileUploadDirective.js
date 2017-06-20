@@ -40,13 +40,13 @@ angular
                 if (!helper.isImage(params.file)) return;
 
                 var canvas = element.find('img');
+                console.log(canvas);
                 var reader = new FileReader();
 
                 reader.onload = onLoadFile;
                 reader.readAsDataURL(params.file);
 
                 function onLoadFile(event) {
-
 					canvas[0].src = reader.result;
                 }
 
