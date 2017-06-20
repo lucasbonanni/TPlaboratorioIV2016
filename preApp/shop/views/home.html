@@ -113,7 +113,66 @@
 			</div>
 			<!-- Sidebar end=============================================== -->
 			<div class="col-md-9">
-				<div product-list products="productList" title="Latest Products" addtocart="agregarAlCarrito(element)" groupfilter="groupFilter"></div>
+				<div class="row">
+					<!-- <div class="row nav">
+						<div class="btn-group pull-right" uib-dropdown is-open="status.isopen">
+							<button id="btn-append-to-single-button" type="button" class="btn btn-default" uib-dropdown-toggle >
+								name <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+								<li role="menuitem"><a href="#" >Name</a></li>
+								<li role="menuitem"><a href="#" >Price</a></li>
+							</ul>
+						</div>
+						<div class="btn-group pull-right" uib-dropdown is-open="status.isopen">
+							<button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle >
+								{{comboValue}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								<li role="menuitem"><a href="#" ng-click="comboChanged('Asc')">Asc</a></li>
+								<li role="menuitem"><a href="#" ng-click="comboChanged('Desc')">Desc</a></li>
+							</ul>
+						</div>
+					</div> -->
+					<div class="col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6">
+						<center>
+						<label>Order by:</label>
+							<button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Dropdown
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</center>
+					</div>
+					<div class="col-md-3 col-sm-3">
+						<center>
+						<label>Order:</label>
+							<button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Dropdown
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</center>
+					</div>
+					<div product-list products="productList" title="Latest Products" addtocart="agregarAlCarrito(element)" groupfilter="groupFilter"></div>
+					<!--<center>
+						<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
+					</center>-->
+				</div>
+				<!-- <div pagination pages="10" page="actualPage" on-select="printNumber()"></div> -->
+
 				<div product-carousel></div>
 			</div>
 		</div>

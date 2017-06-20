@@ -1,9 +1,9 @@
 <div id="carouselBlk">
 	<div id="myCarousel" class="carousel slide">
-		<div class="carousel-inner">
-			<div class="item" ng-repeat="image in imageslist" ng-class='{active:$first}'>
+		<div class="carousel-inner" >
+			<div class="item" ng-repeat="image in imageslist" ng-class='{active:$first}' style="width:100em; height:29em;">
 				<div class="container">
-					<a ui-sref="register"><img style="width:100%" ng-src="{{image.image}}" alt="special offers" /></a>
+					<a ui-sref="register"><img  ng-src="{{image.image}}" alt="special offers" style="height:29em;" /></a>
 					<div class="carousel-caption">
 						<h4>{{image.label}}</h4>
 						<p>{{image.description}}</p>

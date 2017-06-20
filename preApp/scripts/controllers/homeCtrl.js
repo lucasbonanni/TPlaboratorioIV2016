@@ -13,6 +13,32 @@ angular.module('tplaboratorioIv2016App')
     $scope.carrito = [];
     $scope.totalPrice = 0;
     $scope.groupFilter = {};
+    $scope.actualPage = 1;
+    $scope.printNumber = function (){
+      console.info("print number");
+      console.info("controller page number",$scope.actualPage);
+    };
+
+
+    $scope.totalItems = 64;
+    $scope.currentPage = 4;
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function() {
+      console.log('Page changed to: ' + $scope.bigCurrentPage);
+    };
+    $scope.comboValue = "Desc";
+    $scope.comboChanged = function (val) {
+      $scope.comboValue = val;
+    }
+
+    $scope.maxSize = 5;
+    $scope.bigTotalItems = 175;
+    $scope.bigCurrentPage = 1;
+
+
     console.info($scope.groupFilter);
     $scope.storedValues = $cookies.getObject('carrito');
     if ($scope.storedValues != null) {
