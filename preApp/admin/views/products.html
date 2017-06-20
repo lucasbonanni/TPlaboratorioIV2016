@@ -1,73 +1,85 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" ui-sref="admin.products({'#':'collapseOne'})" aria-expanded="true"
-          aria-controls="collapseOne">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" ui-sref="admin.products({'#':'collapseOne'})" aria-expanded="true"
+                    aria-controls="collapseOne">
           Alta de producto
         </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        <div class="form-horizontal">
-          <div class="row">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-md-offset-1">
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Nombre</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Descripción</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Precio</label>
-                <div class="col-md-9">
-                  <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                  </div>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5 col-md-4 col-md-offset-1">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Nombre</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Descripción</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Precio</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
+                                    </div>
 
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Cantidad</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Banda</label>
-                <div class="col-md-9">
-                  <select  ng-model="data.model" class="form-control">
-					  <option value="">---Please select---</option>
-                      <option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Typo de product</label>
-                <div class="col-md-9">
-                  <select  ng-model="data.model" class="form-control">
-					  <option value="">---Please select---</option>
-                      <option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-5 col-sm-offset-2 col-md-4 col-md-offset-2">
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Descuento</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>
-              <!--<div class="form-group form-group-sm">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Cantidad</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Banda</label>
+                                <div class="col-md-9">
+                                    <select ng-model="data.model" class="form-control">
+										<option value="">---Please select---</option>
+										<option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
+									</select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Typo de product</label>
+                                <div class="col-md-9">
+                                    <select ng-model="data.model" class="form-control">
+										<option value="">---Please select---</option>
+										<option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
+									</select>
+                                </div>
+                            </div>
+							<div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Descuento</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-5 col-sm-offset-2 col-md-4 col-md-offset-2">
+                            <div style="margin-bottom:30px;">
+                                <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                                    <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                                        <div class="carousel-caption">
+                                            <h4>Slide {{slide.id}}</h4>
+                                            <p>{{slide.text}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group form-group-sm">
                 <label class="control-label col-md-3">Descuento</label>
                 <div class="col-md-9">
                   <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
@@ -79,83 +91,83 @@
                   <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
                 </div>
               </div>-->
-              <div class="input-group input-group-sm">
-                <div ng-show="uploader.isHTML5">
-                  <!-- 3. nv-file-over uploader="link" over-class="className" -->
-                  <!--
+                            <div class="input-group input-group-sm">
+                                <div ng-show="uploader.isHTML5">
+                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                    <!--
                         <div class="well my-drop-zone" nv-file-over="" uploader="uploader" >
                             Base drop zone
                         </div>
 -->
 
-                  <div nv-file-drop="" uploader="uploader">
-                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone" style="height:110px">
-                      Arrastre las imágenes
+                                    <div nv-file-drop="" uploader="uploader">
+                                        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone" style="height:110px">
+                                            Arrastre las imágenes
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                                <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3">
 
-                </div>
-                <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
-                <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-
-              <div ng-repeat="item in uploader.queue">
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                  <div class="thumbnail">
-                    <button type="button" class="close" aria-label="Close" ng-click="item.remove()">
+                            <div ng-repeat="item in uploader.queue">
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <button type="button" class="close" aria-label="Close" ng-click="item.remove()">
 							<span aria-hidden="true">&times;</span>
 						</button>
-                    <div class="img-thumbnail img-responsive" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                    </label>
-                    <div class="caption">
-                      <label>{{ item.file.name }}</label> {{ item.file.size/1024/1024|number:2 }} MB
+                                        <div class="img-thumbnail img-responsive" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                        </label>
+                                        <div class="caption">
+                                            <label>{{ item.file.name }}</label> {{ item.file.size/1024/1024|number:2 }} MB
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-              <div>
-                <div class="progress" style="">
-                  <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-                </div>
-              </div>
-              <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <div>
+                                <div class="progress" style="">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
 				<span class="glyphicon glyphicon-upload"></span> Upload all
 			</button>
-              <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                            <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
 				<span class="glyphicon glyphicon-ban-circle"></span> Cancel all
 			</button>
-              <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                            <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
 				<span class="glyphicon glyphicon-trash"></span> Remove all
 			</button>
-            </div>
-          </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
           Listado de productos
         </a>
-      </h4>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+            </div>
+        </div>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-        <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
