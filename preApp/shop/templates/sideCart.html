@@ -1,5 +1,6 @@
 <a id="myCart" ui-sref="productSummary">
   <img src="shop/themes/images/ico-cart.png" alt="cart">
-  {{products.length}} {{text}}
-  <span class="badge badge-warning pull-right">$ {{totalprice | number:2}}</span>
+  <label>{{products.length}} {{text}}
+      <span class="badge badge-warning pull-right">$ {{totalprice | number:2}}</span>
+  </label>
 </a>
