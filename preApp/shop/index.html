@@ -39,52 +39,7 @@
 <style type="text/css" id="enject"></style>
 
 <div id="header">
-  <div class="container-fluid">
-    <div class="row" style="border-bottom: white; border-bottom-style: solid; border-bottom-width: thin;">
-      <div class="col-md-4 col-sm-6">
-        <img src="shop/images/icarus-music-argentina-web.png" alt="" class="img-responsive" alt="Responsive image">
-      </div>
-      <div class="col-md-8 col-sm-6">
-        <div id="welcomeLine" class="row" ng-include="'shop/templates/indexWelcomeLine.html'">
-
-        </div>
-        <!-- Navbar ================================================== -->
-        <!-- <div id="logoArea" class="navbar" ng-include="'shop/templates/indexNavbar.html'"> -->
-
-        <nav class="navbar navbar-default navbar-static-top" style="border-bottom-style: none; margin-bottom: 10px;">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-8">
-              <div class="col-md-6 col-sm-12">
-                <form class="navbar-form navbar-left">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                  </div>
-                </form>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <ul class="nav navbar-nav navbar-left">
-                  <li class="active"><a ui-sref="shop.home">Home</a></li>
-                  <li><a ui-sref="shop.login">Login</a></li>
-                  <li><a ui-sref="admin.dashboard">Administración</a></li>
-                  <li role="separator" class="divider"></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
-
-      </div>
-
-    </div>
-  </div>
+  <ui-view name="header"></ui-view>
 </div>
 <!-- Header End====================================================================== -->
 

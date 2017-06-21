@@ -32,6 +32,11 @@ angular
         $authProvider.storageType = 'localStorage';
         $authProvider.withCredentials = false;
 
+        var shopHeader = {
+            templateUrl: 'shop/views/shop.header.html',
+            controller: 'shopHeaderCtrl'
+        };
+
         $stateProvider
             .state('shop', {
                 abstract: true,
@@ -43,7 +48,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/home.html',
                         controller: 'HomeCtrl'
-                    }
+                    },
+                    header:shopHeader
                 }
             })
             .state('shop.product', {
