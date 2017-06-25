@@ -37,6 +37,11 @@ angular
             controller: 'shopHeaderCtrl'
         };
 
+        var adminNav = {
+            templateUrl: 'admin/views/admin.nav.html',
+            controller: 'adminNavCtrl'
+        };
+
         $stateProvider
             .state('shop', {
                 abstract: true,
@@ -49,7 +54,7 @@ angular
                         templateUrl: 'shop/views/home.html',
                         controller: 'HomeCtrl'
                     },
-                    header:shopHeader
+                    header: shopHeader
                 }
             })
             .state('shop.product', {
@@ -107,7 +112,8 @@ angular
                     contenido: {
                         templateUrl: 'admin/views/dashboard.html',
                         controller: 'principalCtrl'
-                    }
+                    },
+                    nav: adminNav
                 }
             })
             .state('admin.products', {
@@ -116,7 +122,8 @@ angular
                     contenido: {
                         templateUrl: 'admin/views/products.html',
                         controller: 'productsCtrl'
-                    }
+                    },
+                    nav: adminNav
                 }
             })
             .state('usuarios', {
