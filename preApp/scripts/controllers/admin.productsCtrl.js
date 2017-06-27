@@ -10,6 +10,25 @@
 
 angular.module('tplaboratorioIv2016App')
     .controller('productsCtrl', function ($scope, FileUploader) {
+
+        var imagesToUpload = [];
+        $scope.showAlert = false;
+
+
+        $scope.noWrapSlides = false;
+        $scope.active = 0;
+        var slides = $scope.slides = [];
+        var currIndex = 0;
+
+        $scope.createOrUpdate = function(){
+            if(imagesToUpload.length > 0 ) {
+                $scope.showAlert = true;
+            } else {
+
+            }
+                
+        }
+
         $scope.myData = [{
             "nombre": "Cox",
             "descripcion": "Carney",
@@ -40,7 +59,7 @@ angular.module('tplaboratorioIv2016App')
             }, {
                 "name": "nombre3",
                 "id": "3"
-            }, ]
+            } ]
         };
 
         var uploader = $scope.uploader = new FileUploader({
@@ -55,6 +74,8 @@ angular.module('tplaboratorioIv2016App')
         uploader.filters.push({
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/ , options) {
+                imagesToUpload.push(item);
+                console.info("array",imagesToUpload);
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
@@ -63,15 +84,21 @@ angular.module('tplaboratorioIv2016App')
 
         $scope.change = function (value) {
             console.info("element", value);
-        }
+        };
+
+        $scope.buttonClick = function(){
+            var objectPr = JSON.stringify(slides);
+            console.info("stringigy",objectPr);
+        };
 
         // CALLBACKS
 
         /*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
                     console.info('onWhenAddingFileFailed', item, filter, options);
-        		};
+        };
                 uploader.onAfterAddingFile = function(fileItem) {
                     console.info('onAfterAddingFile', fileItem);
+                    $scope.showAlert = true;
                 };
                 uploader.onAfterAddingAll = function(addedFileItems) {
                     console.info('onAfterAddingAll', addedFileItems);
@@ -93,21 +120,27 @@ angular.module('tplaboratorioIv2016App')
                 };
                 uploader.onCancelItem = function(fileItem, response, status, headers) {
                     console.info('onCancelItem', fileItem, response, status, headers);
-                };
-                uploader.onCompleteItem = function(fileItem, response, status, headers) {
-                    console.info('onCompleteItem', fileItem, response, status, headers);
-                };
-                uploader.onCompleteAll = function() {
-                    console.info('onCompleteAll');
                 };*/
+                uploader.onCompleteItem = function(fileItem, response, status, headers) {
+                    imagesToUpload = [];
+                    $scope.slides.push({
+                        image: response,
+                        text: '',
+                        id: currIndex++
+                    });
+                    console.info('onCompleteItem',  response);
+                };
+                uploader.onCompleteAll = function(response, status, headers) {
+                    $scope.showAlert = false;
+                    imagesToUpload = [];
+                    console.info('onCompleteAll',response);
+                    uploader.clearQueue();
+                };
 
 
         /* -----------------------     carousel       -------------------------  */
 
-        $scope.noWrapSlides = false;
-        $scope.active = 0;
-        var slides = $scope.slides = [];
-        var currIndex = 0;
+
 
         $scope.addSlide = function () {
             var newWidth = 600 + slides.length + 1;
