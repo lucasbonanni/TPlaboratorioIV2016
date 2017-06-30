@@ -13,16 +13,44 @@ angular.module('tplaboratorioIv2016App')
         this.columnDefinition = columnDefinition;
         this.editarElemento = $scope.editarElemento = editarElemento;
         this.eliminarElemento = $scope.eliminarElemento = eliminarElemento;
+        this.processElement = processElement;
+        this.getProcecedObjects = getProcecedObjects;
+
         $scope.producto = {};
         var imagesToUpload = [];
         $scope.showAlert = false;
-        $scope.gridOptions = {};
+        $scope.gridOptions =  {
+            // Configuracion para exportar datos.
+            exporterCsvFilename: 'misdatos.csv',
+            exporterCsvColumnSeparator: ';',
+            exporterPdfDefaultStyle: {fontSize: 9},
+            exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
+            exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
+            exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
+            exporterPdfFooter: function ( currentPage, pageCount ) {
+                return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+            },
+            exporterPdfCustomFormatter: function ( docDefinition ) {
+                docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+                docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+                return docDefinition;
+            },
+            exporterPdfOrientation: 'portrait',
+            exporterPdfPageSize: 'LETTER',
+            exporterPdfMaxGridWidth: 500,
+            exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+            onRegisterApi: function(gridApi){
+                $scope.gridApi = gridApi;
+            }
+        };
+        $scope.gridOptions.enableGridMenu = true;
         $scope.gridOptions.enableColumnMenus = false;
         $scope.gridOptions.columnDefs = columnDefinition();
 
         $scope.noWrapSlides = false;
         $scope.active = 0;
         var slides = $scope.slides = [];
+        var imagesMock = [];
         var currIndex = 0;
 
         // to use when it load the page
@@ -45,7 +73,9 @@ angular.module('tplaboratorioIv2016App')
 
 
         function editarElemento(row){
+            processElement(row.entity);
             $scope.producto = row.entity;
+            $scope.slides = row.entity.images;
             $location.hash('top');
             // call $anchorScroll()
             $anchorScroll();
@@ -64,21 +94,21 @@ angular.module('tplaboratorioIv2016App')
 
        function columnDefinition() {
             return [
-                { field: 'id', name: '#',width: 35},
-                { field: 'nombre', name: 'nombre'},
-                { field: 'descripcion', name: 'descripcion'},
-                { field: 'banda', name: 'banda'},
-                { field: 'cantidad', name: 'Cantidad'},
-                { field: 'precio', name: 'precio'},
-                { field: 'tipo', name: 'tipo'},
-                { field: 'descuento', name: 'descuento', width: 90},
+                { field: 'id', name: '#',width: 35,enableHiding: false, enableColumnMenu: false},
+                { field: 'nombre', name: 'nombre',enableHiding: false},
+                { field: 'descripcion', name: 'descripcion',enableHiding: false},
+                { field: 'banda', name: 'banda',enableHiding: false},
+                { field: 'cantidad', name: 'Cantidad',enableHiding: false},
+                { field: 'precio', name: 'precio',enableHiding: false},
+                { field: 'tipo', name: 'tipo',enableHiding: false},
+                { field: 'descuento', name: 'descuento', width: 90 ,enableHiding: false},
                 { field: 'edit', name: '..',minWidth: 35, 
-                    cellEditableCondition: false, enableSorting: false, width: 35,
+                    cellEditableCondition: false, enableSorting: false, width: 35,enableHiding: false,
                     cellTemplate: '<center><button ng-click="grid.appScope.editarElemento(row)" class="btn btn-primary btn-xs" >'
                     +'<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button></center>' 
                 },
                 { field: 'delete', name: '...',minWidth: 35, 
-                    cellEditableCondition: false, enableSorting: false, width: 35,
+                    cellEditableCondition: false, enableSorting: false, width: 35,enableHiding: false,
                     cellTemplate: '<center><button ng-click="grid.appScope.eliminarElemento(row,rowIndex)" class="btn btn-danger btn-xs" >'
                     +'<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></center>' 
                 }
@@ -168,23 +198,29 @@ angular.module('tplaboratorioIv2016App')
                     console.info('onCancelItem', fileItem, response, status, headers);
                 };*/
         
-        $scope.data = {
-            model: null,
-            list: [{
-                "name": "nombre1",
-                "id": "1"
-            }, {
-                "name": "nombre2",
-                "id": "2"
-            }, {
-                "name": "nombre3",
-                "id": "3"
-            } ]
+
+
+        $scope.addSlide = function () {
+            var newWidth = 600 + imagesMock.length + 1;
+
+            imagesMock.push({
+                image: '//unsplash.it/' + newWidth + '/300',
+                //text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+                //id: currIndex++
+            });
         };
 
+        $scope.addSlide();
+        $scope.addSlide();
+        $scope.addSlide();
 
+        var imagesJson = JSON.stringify(imagesMock);
+        var oneImage = [{
+            image: '//unsplash.it/' + 600 + '/300'
+        }];
+        var oneImageJson = JSON.stringify(oneImage);
 
-        $scope.gridOptions.data = [{
+        var productResponse = [{
             "id":1,
             "nombre": "Cox",
             "descripcion": "Carney",
@@ -192,7 +228,8 @@ angular.module('tplaboratorioIv2016App')
             "cantidad":"",
             "precio": "10",
             "tipo": "Enormo",
-            "descuento": true
+            "descuento": true,
+            "data": imagesJson
         }, {
             "id":1,
             "nombre": "Lorraine",
@@ -201,7 +238,8 @@ angular.module('tplaboratorioIv2016App')
             "cantidad":"",
             "precio": "124",
             "tipo": "Comveyer",
-            "descuento": false
+            "descuento": false,
+            "data": oneImageJson
         }, {
             "id":1,
             "nombre": "Nancy",
@@ -210,19 +248,45 @@ angular.module('tplaboratorioIv2016App')
             "cantidad":"",
             "precio": "75",
             "tipo": "Comveyer",
-            "descuento": false
+            "descuento": false,
+            "data": imagesJson
         }];
+
+        $scope.gridOptions.data = productResponse;
+
+
+        function getProcecedObjects(array){
+            var proceced = {};
+            if(array !== undefined && array !== null){
+                array.forEach(function(element) {
+                    processElement(element);
+                });
+            }
+            return array;
+        }
+
+        function processElement(obj){
+            if(obj.data !== undefined && obj.data !== null){
+                var images = JSON.parse(obj.data);
+                console.info("images:",images,"data:",obj.data);
+                if(images !== undefined && images !== null){
+                    var i = 0;
+                    obj.images = [];
+                    images.forEach(function(element) {
+                        console.log("element",element);
+                        obj.images.push({
+                            image: element.image,
+                            text: '',
+                            id: i++
+                        });
+                    });
+                    obj.firstImage = images[0];
+                }
+            }
+        }
         
         /* -------     carousel       -------------  */
 
-        $scope.addSlide = function () {
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: '//unsplash.it/' + newWidth + '/300',
-                text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-                id: currIndex++
-            });
-        };
 
 
         // for (var i = 0; i < 3; i++) {

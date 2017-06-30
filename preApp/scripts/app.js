@@ -20,6 +20,7 @@ angular
         'satellizer',
         'ui.router',
         'ui.grid',
+        'ui.grid.exporter',
         'ui.bootstrap',
         'angularFileUpload'
     ])
