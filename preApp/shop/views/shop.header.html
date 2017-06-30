@@ -41,9 +41,8 @@
                             </div>
                             <div class="col-md-7 col-sm-12">
                                 <ul class="nav navbar-nav navbar-left">
-                                    <li class="active"><a ui-sref="shop.home">Home</a></li>
-                                    <li><a ui-sref="shop.login">Login</a></li>
-                                    <li><a ui-sref="admin.dashboard">Administración</a></li>
+                                    <li ng-repeat="item in navMenuItems" ui-sref-active="active"><a ui-sref="{{item.state}}">{{item.text}}</a></li>
+
                                     <li role="separator" class="divider"></li>
                                 </ul>
                             </div>
