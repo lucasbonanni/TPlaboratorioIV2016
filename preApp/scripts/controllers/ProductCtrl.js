@@ -9,9 +9,12 @@
  */
 
  angular.module('tplaboratorioIv2016App')
-   .controller('ProductCtrl', function ($scope){
+   .controller('ProductCtrl', function ($scope,$cookies){
      var carrito = [];
-     var storeValues = $cookies.getObject('carrito');
+     $scope.slides = [];
+     $scope.cartCantidad = 0;
+
+      var storeValues = $cookies.getObject('carrito');
      if(storeValues != null){
        carrito = storeValues;
      }
@@ -25,4 +28,45 @@
        $cookies.putObject('carrito', carrito, {'expires': expireDate});
      };
 
+
+     $scope.slides.push({
+          image:'shop/themes/images/products/large/f1.jpg' ,
+          text:'asdfasf',
+          id:0
+        });
+        $scope.slides.push({
+          image:'shop/themes/images/products/large/f2.jpg' ,
+          text:'asdfasdf',
+          id:1
+        });
+        $scope.slides.push({
+          image:'shop/themes/images/products/large/f3.jpg' ,
+          text:'asdfsaf',
+          id:2
+        });
+
+    
+
+     $scope.product ={
+            "id":1,
+            "nombre": "Cox",
+            "descripcion": "Carney",
+            "banda":"banda",
+            "cantidad":50,
+            "precio": "10",
+            "tipo": "Enormo",
+            "descuento": true,
+            "data": $scope.slides
+        };
+        
+        /***** carousel  */
+
+
+         $scope.myInterval = 3000;
+          $scope.noWrapSlides = false;
+          $scope.active = 0;
+          var currIndex = 0;
+
+
+          console.info($scope.slides);
    });
