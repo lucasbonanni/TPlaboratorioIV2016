@@ -64,7 +64,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/product.html',
                         controller: 'ProductCtrl'
-                    }
+                    },
+                    header: shopHeader
                 }
             })
             .state('shop.productSummary', {
@@ -73,7 +74,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/product_summary.html',
                         controller: 'ProductSummaryCtrl'
-                    }
+                    },
+                    header: shopHeader
                 }
             })
             .state('shop.login', {
@@ -86,7 +88,7 @@ angular
                 }
             })
             .state('shop.register', {
-                url: '/register?mail',
+                url: '/register',
                 views: {
                     contenido: {
                         templateUrl: 'shop/views/register.html',
