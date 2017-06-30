@@ -8,30 +8,31 @@
           <!-- <tr>
             <th> I AM ALREADY REGISTERED </th>
           </tr> -->
-          <tr>
-            <td>
+          <tr class="row">
+            <td class="col-sm-12">
+
               <form class="form-horizontal">
                 <div class="control-group">
-                  <label class="control-label" for="inputUsername">Username</label>
-                  <div class="controls">
-                    <input type="text" id="inputUsername" placeholder="Username">
+                  <label class="col-sm-2 col-sm-offset-2 control-label" for="inputUsername">Usuario</label>
+                  <div class="col-sm-4">
+                    <input type="text" id="inputUsername" placeholder="Username" class="form-control">
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="inputPassword1">Password</label>
-                  <div class="controls">
-                    <input type="password" id="inputPassword1" placeholder="Password">
+                  <label class="col-sm-2 col-sm-offset-2 control-label" for="inputPassword1">Contraseña</label>
+                  <div class="col-sm-4">
+                    <input type="password" id="inputPassword1" placeholder="Password" class="form-control">
                   </div>
                 </div>
                 <div class="control-group">
-                  <div class="controls">
-                    <button type="submit" class="btn">Sign in</button> OR <a ui-sref="register" class="btn">Register Now!</a>
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <button type="submit" class="btn btn-info">Ingresar</button> o <a ui-sref="shop.register" class="btn btn-success">Registrarse!</a>
                   </div>
                 </div>
-                <div class="control-group">
+                <!--div class="control-group">
                   <div class="controls">
                     <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
-                  </div>
+                  </div-->
                 </div>
               </form>
             </td>
@@ -103,12 +104,24 @@
             <tr>
               <td>
                 <form class="form-horizontal">
-                  <div class="control-group">
+                  <!--<div class="input-group">
                     <label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
-                    <div class="controls">
-                      <input type="text" class="input-medium" placeholder="CODE">
-                      <button type="submit" class="btn"> ADD </button>
+                    <div class="control">
+                      <input type="text" placeholder="codigo" class="form-control">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"> ADD </button>
+                      </span>
+                      
                     </div>
+                  </div>-->
+                  <div class="col-sm-12">
+                    <div class="form-group row">
+                      <label class="col-sm-3 control-label"><strong> Codigo descuento: </strong> </label>
+                      <div class="col-sm-3"> 
+                        <input type="text" class="form-control" placeholder="ingrese el codigo">
+                      </div>
+                        <button class="btn btn-default" type="button">agregar!</button>
+                    </div><!-- /input-group -->
                   </div>
                 </form>
               </td>
@@ -119,26 +132,26 @@
 
         <table class="table table-bordered">
           <tr>
-            <th>ESTIMATE YOUR SHIPPING </th>
+            <th>Estimá tu envio </th>
           </tr>
           <tr>
             <td>
               <form class="form-horizontal">
                 <div class="control-group">
-                  <label class="control-label" for="inputCountry">Country </label>
-                  <div class="controls">
-                    <input type="text" id="inputCountry" placeholder="Country">
+                  <label class="control-label" for="inputCountry">Pais </label>
+                  <div class="col-sm-3">
+                    <input type="text" id="inputCountry" placeholder="Country" class="form-control">
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="inputPost">Post Code/ Zipcode </label>
-                  <div class="controls">
-                    <input type="text" id="inputPost" placeholder="Postcode">
+                  <label class="control-label" for="inputPost" >Zipcode / Codigo Postal </label>
+                  <div class="col-sm-3">
+                    <input type="text" id="inputPost" placeholder="Postcode" class="form-control">
                   </div>
                 </div>
                 <div class="control-group">
                   <div class="controls">
-                    <button type="submit" class="btn">ESTIMATE </button>
+                    <button type="submit" class="btn btn-info">Estimar </button>
                   </div>
                 </div>
               </form>

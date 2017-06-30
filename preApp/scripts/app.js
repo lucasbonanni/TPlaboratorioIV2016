@@ -84,7 +84,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/login.html',
                         controller: 'LoginCtrl'
-                    }
+                    },
+                    header: shopHeader
                 }
             })
             .state('shop.register', {
@@ -93,7 +94,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/register.html',
                         controller: 'RegisterCtrl'
-                    }
+                    },
+                    header: shopHeader
                 }
             })
             .state('shop.contact', {
@@ -102,7 +104,8 @@ angular
                     contenido: {
                         templateUrl: 'shop/views/contact.html',
                         controller: 'ContactCtrl'
-                    }
+                    },
+                    header: shopHeader
                 }
             })
             .state('admin', {
