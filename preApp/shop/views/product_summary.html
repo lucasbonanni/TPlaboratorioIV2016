@@ -131,21 +131,21 @@
         </table>
 
         <table class="table table-bordered">
-          <tr>
+          <tr class="row">
             <th>Estimá tu envio </th>
           </tr>
-          <tr>
-            <td>
-              <form class="form-horizontal">
+          <tr class="row">
+            <td class="col-sm-12">
+              <form class="form-horizontal col-sm-6">
                 <div class="control-group">
                   <label class="control-label" for="inputCountry">Pais </label>
-                  <div class="col-sm-3">
+                  <div class="col-sm-7">
                     <input type="text" id="inputCountry" placeholder="Country" class="form-control">
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="inputPost" >Zipcode / Codigo Postal </label>
-                  <div class="col-sm-3">
+                  <div class="col-sm-7">
                     <input type="text" id="inputPost" placeholder="Postcode" class="form-control">
                   </div>
                 </div>
@@ -155,7 +155,11 @@
                   </div>
                 </div>
               </form>
+              <div class="col-sm-6">
+                <div google-maps-js></div>
+              </div>
             </td>
+
           </tr>
         </table>
         <a class="btn btn-large" ui-sref="main"><i class="icon-arrow-left"></i> Continue Shopping </a>
