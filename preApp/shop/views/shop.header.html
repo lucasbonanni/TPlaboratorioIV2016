@@ -5,16 +5,16 @@
         </div>
         <div class="col-md-8 col-sm-6">
             <div class="row">
-                <div class="col-md-6 hidden-sm hidden-xs"><center>Welcome!<strong> User</strong></center></div>
+                <div class="col-md-6 hidden-sm hidden-xs"><center>Bienvenido!<strong> User</strong></center></div>
                 <div class="col-md-6">
-                    <div class="pull-right hidden-sm hidden-xs">
-                        <span class="btn btn-mini">$ {{totalprice }}</span>
-                        <a >
-                            <span class="btn btn-mini btn-primary">
+                    <div class="pull-right hidden-sm hidden-xs btn-group btn-group-sm" style="margin-top:5px;">
+                        <button class="btn btn-default">$ {{totalprice }}</button>
+                            <button class="btn btn-info">
+                                
+                                <span class="badge">{{ items }}</span></a>
+                                items
                                 <i class="icon-shopping-cart icon-white"></i>
-                                [ {{ items }} ] Itemes in your cart
-                            </span>
-                        </a>
+                            </button>
                     </div>
                 </div>
             </div>

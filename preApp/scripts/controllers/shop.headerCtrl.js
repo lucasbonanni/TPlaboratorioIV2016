@@ -37,8 +37,12 @@ angular.module('tplaboratorioIv2016App')
             },
             {
                 text: 'Resumen',
-                state: 'shop.summary',
+                state: 'shop.productSummary',
                 iconClass: 'fa fa-building'
+            }, {
+                text: 'Cuenta',
+                state: 'shop.register',
+                iconClass: 'fa fa-truck'
             },
 
             {
