@@ -2,26 +2,27 @@
   <div class="container">
     <div class="row">
       <div class="span9">
-        <ul class="breadcrumb">
+        <!--<ul class="breadcrumb">
           <li><a href="index.html">Home</a> <span class="divider">/</span></li>
           <li class="active">Login</li>
-        </ul>
+        </ul>-->
         <h3> Login</h3>
         <hr class="soft" />
 
         <div class="row">
           <div class="span4">
             <div class="well">
-              <h5>CREATE YOUR ACCOUNT</h5><br/> Enter your e-mail address to create an account.<br/><br/><br/>
-              <form action="register.html">
-                <div class="control-group">
-                  <label class="control-label" for="inputEmail0">E-mail address</label>
+              <h4>Creá tu cuenta</h4><br/> Ingresá tu correo para registrarte.<br/><br/><br/>
+              <form>
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="inputEmail0">Email</label>
                   <div class="controls">
-                    <input class="span3" type="text" id="inputEmail0" placeholder="Email" ng-model="email">
+                    <input class="form-control" type="email" id="inputEmail0" placeholder="Email" ng-model="email" required>
                   </div>
                 </div>
                 <div class="controls">
-                  <button type="submit" class="btn block" ui-sref="register({mail:email})">Create Your Account</button>
+                  <center><button type="submit" class="btn btn-success block" >Crear cuenta</button></center>
+                  <!--ui-sref="register({mail:email})"-->
                 </div>
               </form>
             </div>
@@ -29,24 +30,34 @@
           <div class="span1"> &nbsp;</div>
           <div class="span4">
             <div class="well">
-              <h5>ALREADY REGISTERED ?</h5>
+              <h4>Ya tiene una cuenta?</h4>
               <form>
-                <div class="control-group">
+                <div class="form-group has-feedback">
                   <label class="control-label" for="inputEmail1">Email</label>
                   <div class="controls">
-                    <input class="span3" type="text" id="inputEmail1" placeholder="Email">
+                    <input class="form-control" type="email" id="inputEmail1" placeholder="Email" required>
                   </div>
                 </div>
-                <div class="control-group">
-                  <label class="control-label" for="inputPassword1">Password</label>
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="inputPassword1">Contraseña</label>
                   <div class="controls">
-                    <input type="password" class="span3" id="inputPassword1" placeholder="Password">
+                    <input type="password" class="form-control" id="inputPassword1" placeholder="Contraseña" required>
                   </div>
                 </div>
-                <div class="control-group">
+                <div class="form-group has-feedback">
                   <div class="controls">
-                    <button type="submit" class="btn">Sign in</button> <a href="forgetpass.html">Forget password?</a>
+                    <center><button type="submit" class="btn btn-danger">Sign in</button> <a href="">Olvido la contraseña?</a></center>
                   </div>
+                </div>
+                <div class="form-group has-feedback">
+                  <center>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-success btn-xs">Cliente</button>
+                      <button type="button" class="btn btn-info btn-xs">Empleado</button>
+                      <button type="button" class="btn btn-warning btn-xs">Encargado</button>
+                      <button type="button" class="btn btn-danger btn-xs">Administrador</button>
+                    </div>
+                  </center>
                 </div>
               </form>
             </div>
