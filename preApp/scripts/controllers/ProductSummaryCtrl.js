@@ -9,17 +9,36 @@
  */
 
 angular.module('tplaboratorioIv2016App')
-  .controller('ProductSummaryCtrl', function($scope, $cookies) {
+  .controller('ProductSummaryCtrl', function($scope, $cookies,NgMap) {
     $scope.carrito = [];
     $scope.discount = 0;
     $scope.tax = 1.10;
     $scope.totalPrice = 0;
     $scope.totalDiscount = 0;
     $scope.totalTax = 0;
+    $scope.direction = '';
+    $scope.MejorDistancia = MejorDistancia;
+    $scope.originDirection = '';
+    $scope.directionOrigin = '';
+    $scope.directionDestination = '';
+    $scope.showDistance = '';
+    $scope.distanceValue = 0;
+    //$scope.lat = -34.605044, $scope.lng = -58.382430;
+    $scope.lat = -34.577877; $scope.lng = -58.427484;
+    //-34.577877, -58.427484
+    $scope.storedValues = [];
+    
+    ///get the stored values
     $scope.storedValues = $cookies.getObject('carrito');
     if ($scope.storedValues != null) {
       $scope.carrito = buildOrder($scope.storedValues);
     }
+
+    //get the current location
+    navigator.geolocation.getCurrentPosition(function (position) {
+                $scope.lat = position.coords.latitude;
+                $scope.lng = position.coords.longitude;
+    });
 
     $scope.isloged = false;
 
@@ -102,5 +121,92 @@ angular.module('tplaboratorioIv2016App')
         return arrayOrdenado;
       }
     };
+
+
+
+    /* mapa */
+      NgMap.getMap().then(function(map) {
+      console.log(map.getCenter());
+      console.log('markers', map.markers);
+      console.log('shapes', map.shapes);
+
+      map.getCenter()
+    });
+
+
+
+
+    function MejorDistancia(){
+        
+        // var origin2 = 'Greenwich, England';
+        var destinationA = new google.maps.LatLng(-34.605044, -58.382430);
+        var destinationB = new google.maps.LatLng(-34.608779, -58.436673);
+        var destinationC = new google.maps.LatLng(-34.552305, -58.451438);
+        var origins = [];
+        if($scope.direction === ''){
+          var origin1 = new google.maps.LatLng($scope.lat, $scope.lng);
+          origins.push(origin1);
+        }
+        else if($scope.direction !== ''){
+          origins.push($scope.direction);
+        }
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix(
+          {
+            origins: [destinationA, destinationB,destinationC],
+            destinations: origins,
+            travelMode: 'DRIVING',
+          }, callback);
+
+        function callback(response, status) {
+          // See Parsing the Results for
+          // the basics of a callback function.
+          console.info("response",response);
+          var distance1 = response.rows[0].elements[0].distance.value;
+          var distance2 = response.rows[1].elements[0].distance.value;
+          var distance3 = response.rows[2].elements[0].distance.value;
+          var distanceArray = [];
+          distanceArray.push(distance1);
+          distanceArray.push(distance2);
+          distanceArray.push(distance3);
+          var min = Math.min.apply(Math,distanceArray);
+          $scope.directionDestination = $scope.direction;
+          
+          if(min === distance1){
+            $scope.directionOrigin = response.originAddresses[0];
+            $scope.showDistance = response.rows[0].elements[0].distance.text;
+            $scope.distanceValue = distance1;
+          }else if ( min === distance2){
+            $scope.directionOrigin = response.originAddresses[1];
+            $scope.showDistance = response.rows[1].elements[0].distance.text;
+            $scope.distanceValue = distance2;
+          } else if ( min === distance3){
+            $scope.directionOrigin = response.originAddresses[0];
+            $scope.showDistance = response.rows[2].elements[0].distance.text;
+            $scope.distanceValue = distance3;
+          }
+          $scope.$apply();
+          console.info("distance",$scope.showDistance,$scope.distanceValue);
+        }
+    }
+
+
+    $scope.positions = [];
+
+    $scope.positions.push([-34.605044, -58.382430]);
+    $scope.positions.push([-34.608779, -58.436673]);
+    $scope.positions.push([-34.552305, -58.451438]);
+
+    //  $scope.mapMarkers.push({
+    //     title: 'Hola',
+    //     iconUrl: '<i class="glyphicon glyphicon-arrow-down"></i>',
+    //     lat: '-34.605044',
+    //     lon: '-58.382430'
+    //   });
+      ///-34.605044, -58.382430
+      //-34.608779, -58.436673
+      //-34.552305, -58.451438
+
+
 
   });

@@ -22,7 +22,8 @@ angular
         'ui.grid',
         'ui.grid.exporter',
         'ui.bootstrap',
-        'angularFileUpload'
+        'angularFileUpload',
+        'ngMap'
     ])
     .config(function ($authProvider, $stateProvider, $urlRouterProvider) {
         $authProvider.baseUrl = 'http://localhost';
