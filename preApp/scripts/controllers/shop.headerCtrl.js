@@ -9,7 +9,7 @@ angular.module('tplaboratorioIv2016App')
     var isEnc = false;
     var isEmp = false;
     var isClient = true;
-    var isLogin = true;
+    var isLogin = false;
 
 
       var invitedMenu = [{
