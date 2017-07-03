@@ -90,7 +90,7 @@ angular
                 }
             })
             .state('shop.register', {
-                url: '/register',
+                url: '/register?mail',
                 views: {
                     contenido: {
                         templateUrl: 'shop/views/register.html',

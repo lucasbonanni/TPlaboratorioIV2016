@@ -9,6 +9,12 @@
  */
 
  angular.module('tplaboratorioIv2016App')
-   .controller('LoginCtrl', function ($scope){
+   .controller('LoginCtrl', function ($scope, $state){
      $scope.email = '';
+
+     $scope.registrar = function(){
+       if($scope.email !== ''){
+          $state.go('shop.register',{mail:$scope.email});
+       }
+     };
    });
