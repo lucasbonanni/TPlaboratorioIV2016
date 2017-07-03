@@ -23,6 +23,7 @@ angular.module('tplaboratorioIv2016App')
     $scope.directionDestination = '';
     $scope.showDistance = '';
     $scope.distanceValue = 0;
+    $scope.isLoged = false;
     //$scope.lat = -34.605044, $scope.lng = -58.382430;
     $scope.lat = -34.577877; $scope.lng = -58.427484;
     //-34.577877, -58.427484

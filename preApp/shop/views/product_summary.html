@@ -8,20 +8,20 @@
           <!-- <tr>
             <th> I AM ALREADY REGISTERED </th>
           </tr> -->
-          <tr class="row">
+          <tr class="row" ng-if="!isLoged">
             <td class="col-sm-12">
 
-              <form class="form-horizontal">
+              <form class="form-horizontal has-feedback">
                 <div class="control-group">
                   <label class="col-sm-2 col-sm-offset-2 control-label" for="inputUsername">Usuario</label>
                   <div class="col-sm-4">
-                    <input type="text" id="inputUsername" placeholder="usuario" class="form-control">
+                    <input type="text" id="inputUsername" placeholder="usuario" class="form-control" required>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="col-sm-2 col-sm-offset-2 control-label" for="inputPassword1">Contraseña</label>
                   <div class="col-sm-4">
-                    <input type="password" id="inputPassword1" placeholder="contraseña" class="form-control">
+                    <input type="password" id="inputPassword1" placeholder="contraseña" class="form-control" required>
                   </div>
                 </div>
                 <div class="control-group">
@@ -146,7 +146,7 @@
                 <div class="control-group">
                   <label class="control-label" for="inputPost" >Su dirección</label>
                   <div class="col-sm-7">
-                    <input type="text" id="inputPost" placeholder="Calle nº, ciudad" class="form-control" ng-model="direction">
+                    <input type="text" id="inputPost" placeholder="Calle nº, ciudad" class="form-control" ng-model="direction"> 
                   </div>
                 </div>
                 <div class="control-group">
