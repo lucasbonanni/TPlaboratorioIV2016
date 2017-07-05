@@ -121,7 +121,8 @@ angular
                         controller: 'principalCtrl'
                     },
                     nav: adminNav
-                }
+                },
+                data: { auth: "EnterpriseAdmin"}  /// the auth data (could use resolve )
             })
             .state('admin.products', {
                 url: '/admin/products',
@@ -150,12 +151,30 @@ angular
             });
         $urlRouterProvider.otherwise('/');
     })
-    .run(function ($rootScope, $location /*, servicioLogin,permisosFactory*/, $auth) {
+    .run(function ($rootScope, $location /*, servicioLogin,permisosFactory*/, $auth,$state) {
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams, options) {
             var hash = $location.hash();
             if (hash) {
                 toParams['#'] = hash;
             }
+            var user = {};
+            user.isAdmin = function(){
+                return false;
+            };
+
+            if ( toState.data.auth === 'EnterpriseAdmin' && !user.isAdmin() ) {
+                    ///event prevent default stop the transition
+                    event.preventDefault();
+                    // $state.transitionTo('shop.login',{mail:'test'});
+                    // return false;
+                    //give a alert if you want to go to another state without access
+                    alert('access denied');
+                    ///redirec to the state
+                    return trans.router.stateService.target('shop.login');
+            }
+    //             if (toState.data.hasOwnProperty('auth') && toState.data.auth === true) {
+    //   // do authy stuff
+    // }
             /*permisosFactory.getPayload();
             $rootScope.isAdministrator = permisosFactory.isAdministrator();
             $rootScope.isUser = permisosFactory.isUser();
