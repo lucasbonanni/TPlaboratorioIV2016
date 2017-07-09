@@ -6,7 +6,7 @@ angular.module('tplaboratorioIv2016App')
 
         var adminMenu = [{
                 text: 'Principal',
-                state: 'admin.products',
+                state: 'admin.dashboard',
                 iconClass: 'fa fa-tachometer'
             },
             {
@@ -16,17 +16,17 @@ angular.module('tplaboratorioIv2016App')
             },
             {
                 text: 'Locales',
-                state: 'admin.products',
+                state: 'admin.stores',
                 iconClass: 'fa fa-building'
             },
             {
                 text: 'Usuarios',
-                state: 'admin.products',
+                state: 'admin.users',
                 iconClass: 'fa fa-users'
             },
             {
                 text: 'Pedidos',
-                state: 'admin.products',
+                state: 'admin.orders',
                 iconClass: 'fa fa-truck'
             }
         ];
@@ -34,7 +34,7 @@ angular.module('tplaboratorioIv2016App')
 
         var encargadoMenu = [{
                 text: 'Principal',
-                state: 'admin.products',
+                state: 'admin.dashboard',
                 iconClass: 'fa fa-tachometer'
             },
             {
@@ -44,19 +44,19 @@ angular.module('tplaboratorioIv2016App')
             },
             {
                 text: 'Empleados',
-                state: 'admin.products',
+                state: 'admin.users',
                 iconClass: 'fa fa-users'
             },
             {
                 text: 'Pedidos',
-                state: 'admin.products',
+                state: 'admin.orders',
                 iconClass: 'fa fa-truck'
             }
         ];
 
         var empleadoMneu = [{
                 text: 'Principal',
-                state: 'admin.products',
+                state: 'admin.dashboard',
                 iconClass: 'fa fa-tachometer'
             },
             {
@@ -66,12 +66,12 @@ angular.module('tplaboratorioIv2016App')
             },
             {
                 text: 'Clientes',
-                state: 'admin.products',
+                state: 'admin.users',
                 iconClass: 'fa fa-users'
             },
             {
                 text: 'Pedidos',
-                state: 'admin.products',
+                state: 'admin.orders',
                 iconClass: 'fa fa-truck'
             }
         ];
