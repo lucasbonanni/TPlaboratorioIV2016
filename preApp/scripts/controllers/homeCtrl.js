@@ -9,8 +9,15 @@
  */
 
 angular.module('tplaboratorioIv2016App')
-  .controller('HomeCtrl', function($scope, $cookies) {
+  .controller('HomeCtrl', function($scope, $cookies,productos,$filter) {
     $scope.carrito = [];
+    $scope.totalItems = 0;
+    $scope.countCD =  0;
+    $scope.countDVD =  0;
+    $scope.countRemeras =  0;
+    $scope.countVinilos =  0;
+
+
     $scope.totalPrice = 0;
     $scope.groupFilter = {};
     $scope.actualPage = 1;
@@ -119,6 +126,17 @@ angular.module('tplaboratorioIv2016App')
       'group': 'camera'
     }];
 
+    productos.obtenerTodos().then(function(response){
+      console.info(response);
+      $scope.productList = response.data;
+      $scope.totalItems = response.data.length;
+      $scope.countCD =  $filter('filter')($scope.productList, { type: 'CD' }).length;
+      $scope.countDVD =  $filter('filter')($scope.productList, { type: 'DVD' }).length;
+      $scope.countRemeras =  $filter('filter')($scope.productList, { type: 'remera' }).length;
+      $scope.countVinilos =  $filter('filter')($scope.productList, { type: 'vinilo' }).length;
+
+    });
+    
     $scope.carouselImages = [{
       'image': 'shop/themes/images/carousel/1.png',
       'label': 'Second Thumbnail label',

@@ -32,27 +32,28 @@
 							<div class="panel panel-info">
 								<div class="panel-heading" role="tab" id="headingOne">
 									<h4 class="panel-title">
-				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				          Filtro #1
-				        </a>
-				      </h4>
+									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Tipos de productos
+									</a>
+				     				 </h4>
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 									<div class="list-group">
-										<a href="#" class="list-group-item" ng-click="groupFilter = {}"> All <span class="badge ">14</span></a>
-										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'memory'}"> Memories <span class="badge ">14</span> </a>
-										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'camera'}">Cameras <span class="badge ">14</span></a>
-										<a href="#" class="list-group-item" ng-click="groupFilter = { 'group':'pendrive'}"> Memories Sticks <span class="badge ">14</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = {}"> All <span class="badge ">{{totalItems}}</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'type':'CD'}"> CD's <span class="badge ">{{countCD}}</span> </a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'type':'DVD'}">DVD's <span class="badge ">{{countDVD}}</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'type':'remera'}"> Remeras <span class="badge ">{{countRemeras}}</span></a>
+										<a href="#" class="list-group-item" ng-click="groupFilter = { 'type':'vinilo'}"> Vinlos <span class="badge ">{{countVinilos}}</span></a>
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-info">
+							<!--<div class="panel panel-info">
 								<div class="panel-heading" role="tab" id="headingTwo">
 									<h4 class="panel-title">
-				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				          Filtro #2
-				        </a>
-				      </h4>
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										Filtro #2
+										</a>
+									</h4>
 								</div>
 								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 									<div class="list-group">
@@ -67,23 +68,23 @@
 							<div class="panel panel-info">
 								<div class="panel-heading" role="tab" id="headingThree">
 									<h4 class="panel-title">
-				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				          Filtro #3
-				        </a>
-				      </h4>
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										Filtro #3
+										</a>
+									</h4>
 								</div>
 								<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 									<div class="list-group">
 										<a href="#" class="list-group-item active">
-				    Cras justo odio
-				  </a>
+											Cras justo odio
+										</a>
 										<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
 										<a href="#" class="list-group-item">Morbi leo risus</a>
 										<a href="#" class="list-group-item">Porta ac consectetur ac</a>
 										<a href="#" class="list-group-item">Vestibulum at eros</a>
 									</div>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>
@@ -134,7 +135,7 @@
 							</ul>
 						</div>
 					</div> -->
-					<div class="col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6">
+					<!--<div class="col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6">
 						<center>
 						<label>Order by:</label>
 							<button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -149,8 +150,8 @@
 								<li><a href="#">Separated link</a></li>
 							</ul>
 						</center>
-					</div>
-					<div class="col-md-3 col-sm-3">
+					</div>-->
+					<!--<div class="col-md-3 col-sm-3">
 						<center>
 						<label>Order:</label>
 							<button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -165,7 +166,7 @@
 								<li><a href="#">Separated link</a></li>
 							</ul>
 						</center>
-					</div>
+					</div>-->
 					<div product-list products="productList" title="Latest Products" addtocart="agregarAlCarrito(element)" groupfilter="groupFilter"></div>
 					<!--<center>
 						<ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
