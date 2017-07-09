@@ -1,6 +1,6 @@
 angular
   .module('tplaboratorioIv2016App')
-  .constant('productsPath','productos')
+  .constant('productsPath','products')
   .service('productos', function ($http,routeFactory,productsPath) {
 
   	this.obtenerTodos = function(){
