@@ -16,13 +16,13 @@
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Nombre</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm " ng-model="producto.nombre" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm " ng-model="producto.name" aria-label="Amount (to the nearest dollar)" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Descripción</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.descripcion" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm" ng-model="producto.short_description" aria-label="Amount (to the nearest dollar)" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -30,7 +30,7 @@
                                 <div class="col-md-9">
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input class="form-control input-sm" ng-model="producto.precio" aria-label="Amount (to the nearest dollar)" type="text">
+                                        <input class="form-control input-sm" ng-model="producto.price" aria-label="Amount (to the nearest dollar)" type="text">
                                     </div>
 
                                 </div>
@@ -38,7 +38,7 @@
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Cantidad</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.cantidad" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm" ng-model="producto.quantity" aria-label="Amount (to the nearest dollar)" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -48,23 +48,23 @@
 										<option value="">---Please select---</option>
 										<option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
 									</select-->
-                                    <input class="form-control input-sm" ng-model="producto.banda" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm" ng-model="producto.band" aria-label="Amount (to the nearest dollar)" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
-                                <label class="control-label col-md-3">Typo de product</label>
+                                <label class="control-label col-md-3">Tipo</label>
                                 <div class="col-md-9">
                                     <!--select ng-model="data.model" class="form-control">
 										<option value="">---Please select---</option>
 										<option ng-repeat="option in data.list" value="{{option.id}}" ng-click="change(option)">{{option.name}}</option>
 									</select-->
-                                    <input class="form-control input-sm" ng-model="producto.tipo" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm" ng-model="producto.type" aria-label="Amount (to the nearest dollar)" type="text">
                                 </div>
                             </div>
 							<div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Descuento</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm " ng-model="producto.descuento" aria-label="Amount (to the nearest dollar)" type="text">
+                                    <input class="form-control input-sm " ng-model="producto.descuento" aria-label="Amount (to the nearest dollar)" type="text" disabled>
                                 </div>
                             </div>
                         </div>
@@ -84,27 +84,8 @@
                                 </div>
                             </div>
 
-                            <!--<div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Descuento</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>
-              <div class="form-group form-group-sm">
-                <label class="control-label col-md-3">Descuento</label>
-                <div class="col-md-9">
-                  <input class="form-control input-sm " aria-label="Amount (to the nearest dollar)" type="text">
-                </div>
-              </div>-->
                             <div class="input-group input-group-sm">
                                 <div ng-show="uploader.isHTML5">
-                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
-                                    <!--
-                        <div class="well my-drop-zone" nv-file-over="" uploader="uploader" >
-                            Base drop zone
-                        </div>
--->
-
                                     <div nv-file-drop="" uploader="uploader">
                                         <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone" style="height:110px">
                                             Arrastre las imágenes
@@ -112,7 +93,6 @@
                                     </div>
 
                                 </div>
-                                <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
                                 <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
                             </div>
                         </div>
@@ -172,7 +152,10 @@
                                 <br/>
                                 <br/>
                             </div>
-                            <center><button type="button" class="btn btn-primary" ng-click="buttonClick()">Submit</button></center>
+                            <center>
+                                <button type="button" class="btn btn-primary" ng-click="createOrUpdate()">{{ isUpdate ? 'Actualizar' : 'Nuevo' }}</button>
+                                <button type="button" class="btn btn-primary" ng-click="CancelAndClean()">Cancelar y limpiar</button>
+                            </center>
                             <br/>
                         </div>
                     </div>
