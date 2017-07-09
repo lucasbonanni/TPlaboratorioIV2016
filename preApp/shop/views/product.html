@@ -8,12 +8,6 @@
         <br>
         <br>
         <div id="differentview" class="moreOptopm carousel slide">
-
-              <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" ng-show="slides.length > 1">
-                  <div uib-slide ng-model="slides" ng-repeat="slide in slides track by slide.id" index="slide.id">
-                      <img ng-src="{{slide.image}}" style="margin:auto;">
-                  </div>
-              </div>
               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -80,7 +74,6 @@
         <p>
           {{product.description}}
         </p>
-        <!-- <a class="btn btn-small pull-right" href="#detail">More Details</a> -->
         <br class="clr" />
         <a href="#" name="detail"></a>
         <hr class="soft" />
