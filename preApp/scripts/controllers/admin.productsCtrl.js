@@ -9,7 +9,7 @@
  */
 
 angular.module('tplaboratorioIv2016App')
-    .controller('productsCtrl', function ($scope, $state,FileUploader,$location, $anchorScroll,productos) {
+    .controller('productsCtrl', function ($scope, $state, FileUploader, $location, $anchorScroll, productos) {
         this.columnDefinition = columnDefinition;
         this.editarElemento = $scope.editarElemento = editarElemento;
         this.eliminarElemento = $scope.eliminarElemento = eliminarElemento;
@@ -22,27 +22,48 @@ angular.module('tplaboratorioIv2016App')
         var imagesToUpload = [];
         $scope.imagesUploaded = false;
         $scope.showAlert = false;
-        $scope.gridOptions =  {
+        $scope.gridOptions = {
             // Configuracion para exportar datos.
             exporterCsvFilename: 'misdatos.csv',
             exporterCsvColumnSeparator: ';',
-            exporterPdfDefaultStyle: {fontSize: 9},
-            exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
-            exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
-            exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
-            exporterPdfFooter: function ( currentPage, pageCount ) {
-                return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+            exporterPdfDefaultStyle: {
+                fontSize: 9
             },
-            exporterPdfCustomFormatter: function ( docDefinition ) {
-                docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
-                docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+            exporterPdfTableStyle: {
+                margin: [30, 30, 30, 30]
+            },
+            exporterPdfTableHeaderStyle: {
+                fontSize: 10,
+                bold: true,
+                italics: true,
+                color: 'red'
+            },
+            exporterPdfHeader: {
+                text: "My Header",
+                style: 'headerStyle'
+            },
+            exporterPdfFooter: function (currentPage, pageCount) {
+                return {
+                    text: currentPage.toString() + ' of ' + pageCount.toString(),
+                    style: 'footerStyle'
+                };
+            },
+            exporterPdfCustomFormatter: function (docDefinition) {
+                docDefinition.styles.headerStyle = {
+                    fontSize: 22,
+                    bold: true
+                };
+                docDefinition.styles.footerStyle = {
+                    fontSize: 10,
+                    bold: true
+                };
                 return docDefinition;
             },
             exporterPdfOrientation: 'portrait',
             exporterPdfPageSize: 'LETTER',
             exporterPdfMaxGridWidth: 500,
             exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
-            onRegisterApi: function(gridApi){
+            onRegisterApi: function (gridApi) {
                 $scope.gridApi = gridApi;
             }
         };
@@ -56,48 +77,43 @@ angular.module('tplaboratorioIv2016App')
         var imagesMock = [];
         var currIndex = 0;
 
-        productos.obtenerTodos().then(function(response){
+        productos.obtenerTodos().then(function (response) {
             $scope.gridOptions.data = response.data;
-        },function(error){
-            productos.obtenerTodos().then(function(response){
+        }, function (error) {
+            productos.obtenerTodos().then(function (response) {
                 $scope.gridOptions.data = response.data;
-            },function(error){
+            }, function (error) {
                 alert('hubo un error al cargar los datos' + error);
             });
         });
 
-        $scope.createOrUpdate = function(){
-            if(imagesToUpload.length > 0 && !$scope.imagesUploaded) {
+        $scope.createOrUpdate = function () {
+            if (imagesToUpload.length > 0 && !$scope.imagesUploaded) {
                 $scope.showAlert = true;
             } else {
-                if($scope.isUpdate)
-                {
+                if ($scope.isUpdate) {
                     updateImages($scope.producto);
-                    productos.Modificar($scope.producto).then(function(respuesta){
+                    productos.Modificar($scope.producto).then(function (respuesta) {
                         $state.reload();
                     });
-                }
-                else
-                {
+                } else {
                     updateImages($scope.producto);
                     console.info($scope.producto);
-                    productos.Agregar($scope.producto).then(function(respuesta){
+                    productos.Agregar($scope.producto).then(function (respuesta) {
                         $state.reload();
                     });
                 }
             }
-            
-        }
+        };
 
-        function updateImages(producto){
-            if($scope.slides.length === 1){
+        function updateImages(producto) {
+            if ($scope.slides.length === 1) {
                 producto.image1 = $scope.slides[0].image;
-            }
-            else if($scope.slides.length === 2){
+            } else if ($scope.slides.length === 2) {
                 producto.image1 = $scope.slides[0].image;
                 producto.image2 = $scope.slides[1].image;
 
-            }else if($scope.slides.length === 3 || $scope.slides.length >= 3){
+            } else if ($scope.slides.length === 3 || $scope.slides.length >= 3) {
                 producto.image1 = $scope.slides[0].image;
                 producto.image2 = $scope.slides[1].image;
                 producto.image3 = $scope.slides[2].image;
@@ -105,14 +121,14 @@ angular.module('tplaboratorioIv2016App')
         }
 
 
-        function CancelAndClean(){
+        function CancelAndClean() {
             uploader.clearQueue();
             $scope.producto = {};
             $scope.slides = [];
             currIndex = 0;
         }
 
-        function editarElemento(row){
+        function editarElemento(row) {
             $scope.slides = [];
             currIndex = 0;
             // processElement(row.entity);
@@ -128,37 +144,75 @@ angular.module('tplaboratorioIv2016App')
             $scope.isUpdate = true;
         }
 
-        function eliminarElemento(row){
+        function eliminarElemento(row) {
             //something
             var index = $scope.gridOptions.data.indexOf(row.entity);
-            console.info("info",row,index);
-            if(index > -1){
+            console.info("info", row, index);
+            if (index > -1) {
                 $scope.gridOptions.data.splice(index, 1);
-                console.info("elements",$scope.gridOptions.data);
-                console.info('rown entity',row.entity.id,row.entity);
+                console.info("elements", $scope.gridOptions.data);
+                console.info('rown entity', row.entity.id, row.entity);
                 // productos.BorrarPorId(row.entity.id);
             }
         }
 
 
-       function columnDefinition() {
-            return [
-                { field: 'id', name: '#',width: 35,enableHiding: false, enableColumnMenu: false},
-                { field: 'name', name: 'nombre',enableHiding: false},
-                { field: 'description', name: 'descripcion',enableHiding: false},
-                { field: 'quantity', name: 'Cantidad',enableHiding: false},
-                { field: 'price', name: 'precio',enableHiding: false, cellTemplate: '<div class="ui-grid-cell-contents" ><center> $ {{grid.getCellValue(row, col)}} </center></div>'},
-                { field: 'type', name: 'tipo',enableHiding: false},
-                // { field: 'descuento', name: 'descuento', width: 90 ,enableHiding: false},
-                { field: 'edit', name: '..',minWidth: 35, 
-                    cellEditableCondition: false, enableSorting: false, width: 35,enableHiding: false,
-                    cellTemplate: '<center><button ng-click="grid.appScope.editarElemento(row)" class="btn btn-primary btn-xs" >'
-                    +'<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button></center>' 
+        function columnDefinition() {
+            return [{
+                    field: 'id',
+                    name: '#',
+                    width: 35,
+                    enableHiding: false,
+                    enableColumnMenu: false
                 },
-                { field: 'delete', name: '...',minWidth: 35, 
-                    cellEditableCondition: false, enableSorting: false, width: 35,enableHiding: false,
-                    cellTemplate: '<center><button ng-click="grid.appScope.eliminarElemento(row,rowIndex)" class="btn btn-danger btn-xs" >'
-                    +'<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></center>' 
+                {
+                    field: 'name',
+                    name: 'nombre',
+                    enableHiding: false
+                },
+                {
+                    field: 'description',
+                    name: 'descripcion',
+                    enableHiding: false
+                },
+                {
+                    field: 'quantity',
+                    name: 'Cantidad',
+                    enableHiding: false
+                },
+                {
+                    field: 'price',
+                    name: 'precio',
+                    enableHiding: false,
+                    cellTemplate: '<div class="ui-grid-cell-contents" ><center> $ {{grid.getCellValue(row, col)}} </center></div>'
+                },
+                {
+                    field: 'type',
+                    name: 'tipo',
+                    enableHiding: false
+                },
+                // { field: 'descuento', name: 'descuento', width: 90 ,enableHiding: false},
+                {
+                    field: 'edit',
+                    name: '..',
+                    minWidth: 35,
+                    cellEditableCondition: false,
+                    enableSorting: false,
+                    width: 35,
+                    enableHiding: false,
+                    cellTemplate: '<center><button ng-click="grid.appScope.editarElemento(row)" class="btn btn-primary btn-xs" >' +
+                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button></center>'
+                },
+                {
+                    field: 'delete',
+                    name: '...',
+                    minWidth: 35,
+                    cellEditableCondition: false,
+                    enableSorting: false,
+                    width: 35,
+                    enableHiding: false,
+                    cellTemplate: '<center><button ng-click="grid.appScope.eliminarElemento(row,rowIndex)" class="btn btn-danger btn-xs" >' +
+                        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button></center>'
                 }
 
             ];
@@ -173,45 +227,35 @@ angular.module('tplaboratorioIv2016App')
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/ , options) {
                 imagesToUpload.push(item);
-                console.info("array",imagesToUpload);
+                console.info("array", imagesToUpload);
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         });
 
 
-        $scope.change = function (value) {
-            console.info("element", value);
-        };
-
-        // $scope.buttonClick = function(){
-        //     var objectPr = JSON.stringify(slides);
-        //     console.info("stringigy",objectPr);
-        // };
-
-
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        uploader.onCompleteItem = function (fileItem, response, status, headers) {
             imagesToUpload = [];
             $scope.slides.push({
                 image: response,
                 text: '',
                 id: currIndex++
             });
-            console.info('onCompleteItem',  response);
+            console.info('onCompleteItem', response);
         };
-        uploader.onCompleteAll = function(response, status, headers) {
+        uploader.onCompleteAll = function (response, status, headers) {
             $scope.showAlert = false;
             imagesToUpload = [];
-            console.info('onCompleteAll',response);
+            console.info('onCompleteAll', response);
             uploader.clearQueue();
             $scope.imagesUploaded = true;
         };
 
-         /* -----------------------TESTING ------------------------------------------*/ 
+        /* -----------------------TESTING ------------------------------------------*/
 
 
 
-         // CALLBACKS
+        // CALLBACKS
 
         /*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
                     console.info('onWhenAddingFileFailed', item, filter, options);
@@ -241,10 +285,10 @@ angular.module('tplaboratorioIv2016App')
                 uploader.onCancelItem = function(fileItem, response, status, headers) {
                     console.info('onCancelItem', fileItem, response, status, headers);
                 };*/
-        
 
 
-         function addSlide (url) {
+
+        function addSlide(url) {
             var newWidth = 600 + imagesMock.length + 1;
 
             $scope.slides.push({
@@ -254,88 +298,18 @@ angular.module('tplaboratorioIv2016App')
             });
         };
 
-        // $scope.addSlide();
-        // $scope.addSlide();
-        // $scope.addSlide();
-
-        var imagesJson = JSON.stringify(imagesMock);
-        var oneImage = [{
-            image: '//unsplash.it/' + 600 + '/300'
-        }];
-        var oneImageJson = JSON.stringify(oneImage);
-
-        // var productResponse = [{
-        //     "id":1,
-        //     "nombre": "Cox",
-        //     "descripcion": "Carney",
-        //     "banda":"banda",
-        //     "cantidad":"",
-        //     "precio": "10",
-        //     "tipo": "Enormo",
-        //     "descuento": true,
-        //     "data": imagesJson
-        // }, {
-        //     "id":1,
-        //     "nombre": "Lorraine",
-        //     "descripcion": "Wise",
-        //     "banda":"banda",
-        //     "cantidad":"",
-        //     "precio": "124",
-        //     "tipo": "Comveyer",
-        //     "descuento": false,
-        //     "data": oneImageJson
-        // }, {
-        //     "id":1,
-        //     "nombre": "Nancy",
-        //     "descripcion": "Waters",
-        //     "banda":"banda",
-        //     "cantidad":"",
-        //     "precio": "75",
-        //     "tipo": "Comveyer",
-        //     "descuento": false,
-        //     "data": imagesJson
-        // }];
-
-        // $scope.gridOptions.data = productResponse;
 
 
-        function getProcecedObjects(array){
+
+        function getProcecedObjects(array) {
             var proceced = {};
-            if(array !== undefined && array !== null){
-                array.forEach(function(element) {
+            if (array !== undefined && array !== null) {
+                array.forEach(function (element) {
                     processElement(element);
                 });
             }
             return array;
         }
-
-        // function processElement(obj){
-        //     if(obj.data !== undefined && obj.data !== null){
-        //         var images = JSON.parse(obj.data);
-        //         console.info("images:",images,"data:",obj.data);
-        //         if(images !== undefined && images !== null){
-        //             var i = 0;
-        //             obj.images = [];
-        //             images.forEach(function(element) {
-        //                 console.log("element",element);
-        //                 obj.images.push({
-        //                     image: element.image,
-        //                     text: '',
-        //                     id: i++
-        //                 });
-        //             });
-        //             obj.firstImage = images[0];
-        //         }
-        //     }
-        // }
-        
-        /* -------     carousel       -------------  */
-
-
-
-        // for (var i = 0; i < 3; i++) {
-        //     $scope.addSlide();
-        // }
 
 
     });
