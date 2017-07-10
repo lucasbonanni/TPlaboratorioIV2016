@@ -87,7 +87,8 @@ angular
                         controller: 'LoginCtrl'
                     },
                     header: shopHeader
-                }
+                },
+                data: { auth: "1951"} 
             })
             .state('shop.register', {
                 url: '/register?mail',
@@ -134,43 +135,66 @@ angular
                     nav: adminNav
                 }
             })
-            .state('usuarios', {
-                url: '/usuarios',
-                templateUrl: 'views/usuarios.html',
-                controller: 'UsuariosCtrl'
+            .state('admin.orders', {
+                url: '/admin/orders',
+                views: {
+                    contenido: {
+                        templateUrl: 'admin/views/orders.html',
+                        controller: 'ordersCtrl'
+                    },
+                    nav: adminNav
+                }
             })
-            .state('altaProducto', {
-                url: '/altaProducto?id',
-                templateUrl: 'views/altaproducto.html',
-                controller: 'AltaproductoCtrl'
+            .state('admin.users', {
+                url: '/admin/users',
+                views: {
+                    contenido: {
+                        templateUrl: 'admin/views/users.html',
+                        controller: 'usersCtrl'
+                    },
+                    nav: adminNav
+                }
             })
-            .state('altaUsuario', {
-                url: '/altaUsuario?id',
-                templateUrl: 'views/altausuario.html',
-                controller: 'AltausuarioCtrl'
+            .state('admin.stores', {
+                url: '/admin/stores',
+                views: {
+                    contenido: {
+                        templateUrl: 'admin/views/stores.html',
+                        controller: 'storesCtrl'
+                    },
+                    nav: adminNav
+                }
             });
+            // .state('usuarios', {
+            //     url: '/usuarios',
+            //     templateUrl: 'views/usuarios.html',
+            //     controller: 'UsuariosCtrl'
+            // })
+            // .state('altaProducto', {
+            //     url: '/altaProducto?id',
+            //     templateUrl: 'views/altaproducto.html',
+            //     controller: 'AltaproductoCtrl'
+            // })
+            // .state('altaUsuario', {
+            //     url: '/altaUsuario?id',
+            //     templateUrl: 'views/altausuario.html',
+            //     controller: 'AltausuarioCtrl'
+            // });
         $urlRouterProvider.otherwise('/');
     })
-    .run(function ($rootScope, $location /*, servicioLogin,permisosFactory*/, $auth,$state) {
+    .run(function ($rootScope, $location , servicioLogin,permisosFactory , $auth ,$state) {
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams, options) {
             var hash = $location.hash();
             if (hash) {
                 toParams['#'] = hash;
             }
-            var user = {};
-            user.isAdmin = function(){
-                return false;
-            };
 
             if ( toState.data.auth === 'EnterpriseAdmin' && !user.isAdmin() ) {
                     ///event prevent default stop the transition
                     event.preventDefault();
-                    // $state.transitionTo('shop.login',{mail:'test'});
-                    // return false;
-                    //give a alert if you want to go to another state without access
-                    alert('access denied');
-                    ///redirec to the state
-                    return trans.router.stateService.target('shop.login');
+
+                    // return trans.router.stateService.target('shop.login');
+                    return $state.go('shop.login', {error:false}    );
             }
     //             if (toState.data.hasOwnProperty('auth') && toState.data.auth === true) {
     //   // do authy stuff
