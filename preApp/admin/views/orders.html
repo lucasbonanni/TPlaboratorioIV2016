@@ -1,0 +1,269 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div id="top" class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" ui-sref="admin.products({'#':'collapseOne'})" aria-expanded="true"
+                    aria-controls="collapseOne">
+          Pedidos de clientes
+        </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5 col-md-4 col-md-offset-1">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Id</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " ng-model="producto.id" aria-label="Amount (to the nearest dollar)" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">cliente</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" ng-model="producto.userName" aria-label="Amount (to the nearest dollar)" type="text" ng-disabled="producto.state === 'entregado'">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Precio</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control input-sm" ng-model="producto.totalPrice" aria-label="Amount (to the nearest dollar)" type="text" ng-disabled="producto.state === 'entregado'">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Estado</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" ng-model="producto.state" aria-label="Amount (to the nearest dollar)" type="text" ng-disabled="producto.state === 'entregado'">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Direccion</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" ng-model="producto.userStreet" aria-label="Amount (to the nearest dollar)" type="text" ng-disabled="producto.state === 'entregado'">
+                                </div>
+                            </div>
+                            <!--<div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Typo de product</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" ng-model="producto.tipo" aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>-->
+							<!--<div class="form-group form-group-sm">
+                                <label class="control-label col-md-3">Descuento</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm " ng-model="producto.descuento" aria-label="Amount (to the nearest dollar)" type="text">
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="col-xs-12 col-sm-5 col-sm-offset-2 col-md-4 col-md-offset-2">
+                            <!--<div style="margin-bottom:30px;">
+                                <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" ng-show="slides.length > 1">
+                                    <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                                        <div class="carousel-caption">
+                                            <h4>Slide {{slide.id}}</h4>
+                                            <p>{{slide.text}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="slides.length <= 1 ">
+                                    <img ng-src="{{slides[0].image}}" alt="" style="max-width:300px; height:250px;" >
+                                </div>
+                            </div>
+
+                            <div class="input-group input-group-sm">
+                                <div ng-show="uploader.isHTML5">
+
+                                    <div nv-file-drop="" uploader="uploader">
+                                        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone" style="height:110px">
+                                            Arrastre las imágenes
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--<div class="col-xs-6 col-xs-offset-3">
+
+                            <div ng-repeat="item in uploader.queue">
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <button type="button" class="close" aria-label="Close" ng-click="item.remove()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="img-thumbnail img-responsive" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                        </label>
+                                        <div class="caption">
+                                            <label>{{ item.file.name }}</label> {{ item.file.size/1024/1024|number:2 }} MB
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <!--<div>
+                                <div class="progress" style="">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <center>
+                            <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                            </button>
+                            <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                <span class="glyphicon glyphicon-trash"></span> Remove all
+                            </button>
+                            </center>-->
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                            <th>Producto</th>
+                                            <th>Description</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <!--<th>Descuento</th>-->
+                                            <th>Tax</th>
+                                            <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-if="carrito.length > 0" ng-repeat="product in carrito">
+                                            <td> {{product.name}}</td>
+                                            <td class="col-sm-3">{{product.description}}</td>
+                                            <td>
+                                                <div class="input-append">
+                                                <input class="span1" style="max-width:34px" placeholder="{{product.quantity}}" id="appendedInputButtons" size="16" type="text" ng-disabled="producto.state === 'entregado'">
+                                                <button class="btn" type="button" ng-click="decrease(product.id)" ng-disabled="producto.state === 'entregado'">
+                                                    <i class="icon-minus"></i>
+                                                </button>
+                                                <button class="btn" type="button" ng-click="increase(product)" ng-disabled="producto.state === 'entregado'">
+                                                    <i class="icon-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger" type="button" ng-click="delete(product.id)" ng-disabled="producto.state === 'entregado'">
+                                                    <i class="icon-remove icon-white"></i>
+                                                </button>
+                                                </div>
+                                            </td>
+                                            <td>$ {{product.price | number:2}}</td>
+                                            <!--<td>$ {{discount | number:2}}</td>-->
+                                            <td>$ {{tax | number:2}}</td>
+                                            <td>$ {{(product.quantity * (product.price - discount)) * (tax/100) + (product.quantity * (product.price - discount)) | number:2 }}</td>
+                                            </tr>
+                                            <tr ng-if="producto.state === undefined || producto.state !== 'entregado'">
+                                            <td> <intput type="text" ng-model="newProduct.description"></td>
+                                            <td class="col-sm-3"><intput type="text" ng-model="newProduct.description"></td>
+                                            <td>
+                                                <div class="input-append">
+                                                <input class="span1" style="max-width:34px" placeholder="{{newProduct.quantity}}" id="appendedInputButtons" size="16" type="text">
+                                                <button class="btn" type="button" ng-click="decrease(newProduct.id)">
+                                                    <i class="icon-minus"></i>
+                                                </button>
+                                                <button class="btn" type="button" ng-click="increase(newProduct)">
+                                                    <i class="icon-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger" type="button" ng-click="delete(newProduct.id)">
+                                                    <i class="icon-remove icon-white"></i>
+                                                </button>
+                                                </div>
+                                            </td>
+                                            <td>$ {{newProduct.price | number:2}}</td>
+                                            <!--<td>$ {{discount | number:2}}</td>-->
+                                            <td>$ {{tax | number:2}}</td>
+                                            <td>$ {{(newProduct.quantity * (newProduct.price - discount)) * (tax/100) + (product.quantity * (product.price - discount)) | number:2 }}</td>
+                                            <td  style="border: none;">
+                                                <button class="btn btn-danger" type="button" ng-click="agregarItem(newProduct)">
+                                                    <i class="icon-plus">Agregar</i>
+                                                </button></td>
+                                            </tr>
+                                            <tr ng-if="carrito == null || carrito.length == 0">
+                                            <td colspan="6">
+                                                <strong><center> Actualmente, tu carrito de compras está vacío </center></strong>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            <td colspan="5" style="text-align:right">Total Price: </td>
+                                            <td> $ {{totalPrice | number:2}}</td>
+                                            </tr>
+                                            <tr>
+                                            <td colspan="5" style="text-align:right">Total Discount: </td>
+                                            <td> $ {{totalDiscount | number:2}}</td>
+                                            </tr>
+                                            <tr>
+                                            <td colspan="5" style="text-align:right">Total Tax: </td>
+                                            <td> $ {{totalTax | number:2}}</td>
+                                            </tr>
+                                            <tr>
+                                            <td colspan="5" style="text-align:right"><strong>TOTAL ($ {{totalPrice |number:2}} - $ {{totalDiscount | number:2}} + ${{totalTax | number:2}}) =</strong></td>
+                                            <td class="text-danger" style="display:block; "> <strong> $ {{totalPrice + totalTax - totalDiscount| number:2}} </strong></td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">
+                            <div ng-show="showAlert">
+                                <br/>
+                                <div class="alert alert-danger">
+                                     <center>
+                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                         Tiene imagenes por subir, suba primero las imagenes
+                                    </center>
+                                </div>
+                            </div>
+                            <div ng-show="!showAlert">
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                            <center>
+                                <button type="button" class="btn btn-primary" ng-click="createOrUpdate()">{{ isUpdate ? 'Actualizar' : 'Nuevo' }}</button>
+                                <button type="button" class="btn btn-primary" ng-click="CancelAndClean()">Cancelar y limpiar</button>
+                            </center>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
+          Listado de pedidos
+        </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="row">
+                    <div id="grid1" ui-grid="gridOptions" ui-grid-edit ui-grid-row-edit ui-grid-cellNav ui-grid-exporter class="grid"></div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <center><h3>Detalles</h3></center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="grid2" ui-grid="gridOptions" ui-grid-edit ui-grid-row-edit ui-grid-cellNav ui-grid-exporter class="grid"></div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
