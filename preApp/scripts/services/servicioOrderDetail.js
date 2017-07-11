@@ -27,7 +27,7 @@ angular
   	};
 
   	this.Modificar = function(producto){
-  		var url = routeFactory.getApiRoute(orderDetailPath);
+  		var url = routeFactory.getApiRoute(orderDetailPath,producto.id);
         return $http.put(url,producto);
   	};
 
