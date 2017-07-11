@@ -22,25 +22,25 @@
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Cliente</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.userName" type="text" ng-disabled="producto.state === 'entregado'">
+                                    <input class="form-control input-sm" ng-model="producto.userName" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Fecha de entrega</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.date" type="date" ng-disabled="producto.state === 'entregado'">
+                                    <input class="form-control input-sm" ng-model="producto.date" type="date">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Estado</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.state" type="text" ng-disabled="producto.state === 'entregado'">
+                                    <input class="form-control input-sm" ng-model="producto.state" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label class="control-label col-md-3">Direccion</label>
                                 <div class="col-md-9">
-                                    <input class="form-control input-sm" ng-model="producto.userStreet" type="text" ng-disabled="producto.state === 'entregado'">
+                                    <input class="form-control input-sm" ng-model="producto.userStreet" type="text">
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
@@ -143,7 +143,7 @@
                                             <td>$ {{tax | number:2}}</td>
                                             <td>$ {{(newProduct.quantity * (newProduct.price - discount)) * (tax/100) + (product.quantity * (product.price - discount)) | number:2 }}</td>
                                             <td  style="border: none;">
-                                                <button class="btn btn-danger" type="button" ng-click="agregarElemento()">
+                                                <button class="btn btn-danger" type="button" ng-click="agregarElemento()" ng-disabled="newProduct.price === undefined || newProduct.name === undefined || newProduct.name === ''  || newProduct.quantity === undefined  || newProduct.price === '0' || newProduct.quantity === '0'">
                                                     <i class="icon-plus">Agregar</i>
                                                 </button></td>
                                             </tr>

@@ -84,6 +84,7 @@ angular.module('tplaboratorioIv2016App')
 
 
         $scope.createOrUpdate = function () {
+            $scope.producto.userId = 4;
             if ($scope.isUpdate) {
                 orders.Modificar($scope.producto).then(function (respuesta) {
                     $scope.carrito.forEach(function(element) {
@@ -122,6 +123,8 @@ angular.module('tplaboratorioIv2016App')
             } else {
                 orders.Agregar($scope.producto).then(function (respuesta) {
                     $scope.carrito.forEach(function(element) {
+                        console.info( respuesta.data);
+                        element.orderId = respuesta.data.id;
                         orderDetail.Agregar(element).then(function(rst){
                             // continue;
                         },
@@ -142,7 +145,7 @@ angular.module('tplaboratorioIv2016App')
 
         function CancelAndClean() {
             $scope.producto = {};
-            $scope.carrito = {};
+            $scope.carrito = [];
             $scope.isUpdate = false;
         }
 
@@ -249,8 +252,12 @@ angular.module('tplaboratorioIv2016App')
 
 
         $scope.increase = function (element) {
-            $scope.carrito.push(element);
-            var expireDate = new Date();
+            for (var i = $scope.carrito.length - 1; i >= 0; i--) {
+                if ($scope.carrito[i].id == element.id) {
+                    $scope.carrito[i].quantity++;
+                    break;
+                }
+            }
             $scope.carrito = buildOrder($scope.carrito);
         };
 
@@ -258,11 +265,17 @@ angular.module('tplaboratorioIv2016App')
             var index;
             for (var i = $scope.carrito.length - 1; i >= 0; i--) {
                 if ($scope.carrito[i].id == id) {
-                    index = i;
+                    if($scope.carrito[i].quantity > 1){
+                        $scope.carrito[i].quantity--;
+                    }
+                    else{
+                        $scope.carrito.splice(i,1);
+                    }
                     break;
                 }
             }
-            $scope.carrito.splice(index, 1);
+            // $scope.carrito.splice(index, 1);
+
             $scope.carrito = buildOrder($scope.carrito);
         };
 
@@ -298,5 +311,5 @@ angular.module('tplaboratorioIv2016App')
             return arrayOrdenado;
 
         };
-
+        console.info('product',$scope.producto);
     });
