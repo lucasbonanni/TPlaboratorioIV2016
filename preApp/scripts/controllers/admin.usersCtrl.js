@@ -9,16 +9,102 @@
  */
 
  angular.module('tplaboratorioIv2016App')
-   .controller('usersCtrl', function ($scope,FileUploader,$location, $anchorScroll){
-           this.columnDefinition = columnDefinition;
+   .controller('usersCtrl', function ($scope,$location, $anchorScroll,users,shop,$state){
+
+        //Methods
+        this.columnDefinition = columnDefinition;
         this.editarElemento = $scope.editarElemento = editarElemento;
         this.eliminarElemento = $scope.eliminarElemento = eliminarElemento;
-        this.processElement = processElement;
-        this.getProcecedObjects = getProcecedObjects;
+        // this.processElement = processElement;
+        // this.getProcecedObjects = getProcecedObjects;
+        $scope.CancelAndClean = CancelAndClean;
 
+        //Variables
+        $scope.storeList = [];
+        $scope.profile = 'administrador';
+        $scope.isUpdate = false;
         $scope.producto = {};
-        var imagesToUpload = [];
-        $scope.showAlert = false;
+        $scope.enableState = [{id:1,text:'Hablitado'},{id:0,text:'Deshabilitado'}];
+
+        //build
+        if('administrador' === $scope.profile){
+            $scope.profileList = [
+                {id:'cliente',text:'Cliente'},
+                {id:'empleado',text:'Empleado'},
+                {id:'encargado',text:'Encargado'},
+                {id:'administrador',text:'Administrador'}
+            ];
+
+            shop.obtenerTodos().then(function(rta){
+                console.log('sucursales',rta.data);
+                $scope.storeList = rta.data;
+            },function(error){
+                console.log(error);
+            });
+
+            users.obtenerTodos().then(function(rta){
+                console.log('todos',rta);
+                 $scope.gridOptions.data = rta.data;
+            },function(error){
+                console.error(error);
+            })
+
+
+        }else if('encargado' === $scope.profile){
+            $scope.profileList = [
+                {id:'cliente',text:'Cliente'},
+                {id:'empleado',text:'Empleado'},
+            ];
+            users.BuscarPorPerfil('cliente').then(function(rta){
+                console.log(rta);
+                $scope.gridOptions.data = rta.data;
+            }, function(error){
+                console.error(error);
+            });
+
+            users.BuscarPorPerfilSucursal('empleado',1).then(function(rta){
+                console.log('empleados',rta.data);
+                // $scope.gridOptions.data = rta.data;
+            }, function(error){
+                console.error(error);
+            });
+
+
+        } else if('empleado' === $scope.profile){
+            $scope.profileList = [
+                {id:'cliente',text:'Cliente'},
+                {id:'empleado',text:'Empleado'},
+            ];
+            users.BuscarPorPerfil('cliente').then(function(rta){
+                console.log(rta);
+                $scope.gridOptions.data = rta.data;
+            }, function(error){
+                console.error(error);
+            });
+
+
+        }
+
+        $scope.createOrUpdate = function () {
+            if ($scope.isUpdate) {
+                console.info($scope.producto);
+                users.Modificar($scope.producto,$scope.producto.id).then(function (respuesta) {
+                    $state.reload();
+                });
+            } else {
+                console.info($scope.producto);
+                users.Agregar($scope.producto).then(function (respuesta) {
+                    $state.reload();
+                });
+            }
+        };
+
+
+        function CancelAndClean() {
+            $scope.producto = {};
+        }
+
+
         $scope.gridOptions =  {
             // Configuracion para exportar datos.
             exporterCsvFilename: 'misdatos.csv',
@@ -61,21 +147,10 @@
             };
         $scope.slides.push(oneSlide);
 
-        $scope.createOrUpdate = function(){
-            if(imagesToUpload.length > 0 ) {
-                $scope.showAlert = true;
-            } else {
-
-            }
-                
-        }
-
-
 
         function editarElemento(row){
-            processElement(row.entity);
+            $scope.isUpdate = true;
             $scope.producto = row.entity;
-            $scope.slides = row.entity.images;
             $location.hash('top');
             // call $anchorScroll()
             $anchorScroll();
@@ -84,23 +159,27 @@
         function eliminarElemento(row){
             //something
             var index = $scope.gridOptions.data.indexOf(row.entity);
-            console.info("info",row,index);
-            if(index > -1){
-                $scope.gridOptions.data.splice(index, 1);
-                console.info("elements",$scope.gridOptions.data);
-            }
+            users.BorrarPorId(row.entity.id).then(function(rta){
+                if(index > -1){
+                    $scope.gridOptions.data.splice(index, 1);
+                    // console.info("elements",$scope.gridOptions.data);
+                }
+            }, function(error){
+                console.error(error);
+            })
+            // console.info("info",row,index);
         }
 
 
        function columnDefinition() {
             return [
                 { field: 'id', name: '#',width: 35,enableHiding: false, enableColumnMenu: false},
-                { field: 'nombre', name: 'nombre',enableHiding: false},
+                { field: 'name', name: 'nombre',enableHiding: false},
                 { field: 'email', name: 'email',enableHiding: false},
-                { field: 'clave', name: 'clave',enableHiding: false},
-                { field: 'perfil', name: 'perfil',enableHiding: false},
-                { field: 'habilitado', name: 'habilitado',enableHiding: false},
-                { field: 'sucursal', name: 'sucursal',enableHiding: false},
+                { field: 'password', name: 'clave',enableHiding: false},
+                { field: 'profile', name: 'perfil',enableHiding: false},
+                { field: 'enabled', name: 'habilitado',enableHiding: false},
+                { field: 'shopId', name: 'sucursal',enableHiding: false},
                 // { field: 'descuento', name: 'descuento', width: 90 ,enableHiding: false},
                 { field: 'edit', name: '..',minWidth: 35, 
                     cellEditableCondition: false, enableSorting: false, width: 35,enableHiding: false,
@@ -118,178 +197,47 @@
         
 
 
-
-
-
-        /* --- Image  Upload  ---- */
-        var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost/personaSlim/ws1/images'
-        });
-        // FILTERS
-        uploader.filters.push({
-            name: 'imageFilter',
-            fn: function (item /*{File|FileLikeObject}*/ , options) {
-                imagesToUpload.push(item);
-                console.info("array",imagesToUpload);
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        });
-
-
         $scope.change = function (value) {
             console.info("element", value);
         };
 
-        $scope.buttonClick = function(){
-            var objectPr = JSON.stringify(slides);
-            console.info("stringigy",objectPr);
-        };
-
-
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
-            imagesToUpload = [];
-            $scope.slides.push({
-                image: response,
-                text: '',
-                id: currIndex++
-            });
-            console.info('onCompleteItem',  response);
-        };
-        uploader.onCompleteAll = function(response, status, headers) {
-            $scope.showAlert = false;
-            imagesToUpload = [];
-            console.info('onCompleteAll',response);
-            uploader.clearQueue();
-        };
-
-         /* -----------------------TESTING ------------------------------------------*/ 
+        // $scope.buttonClick = function(){
+        //     var objectPr = JSON.stringify(slides);
+        //     console.info("stringigy",objectPr);
+        // };
 
 
 
-         // CALLBACKS
 
-        /*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
-                    console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-                uploader.onAfterAddingFile = function(fileItem) {
-                    console.info('onAfterAddingFile', fileItem);
-                    $scope.showAlert = true;
-                };
-                uploader.onAfterAddingAll = function(addedFileItems) {
-                    console.info('onAfterAddingAll', addedFileItems);
-                };
-                uploader.onBeforeUploadItem = function(item) {
-                    console.info('onBeforeUploadItem', item);
-                };
-                uploader.onProgressItem = function(fileItem, progress) {
-                    console.info('onProgressItem', fileItem, progress);
-                };
-                uploader.onProgressAll = function(progress) {
-                    console.info('onProgressAll', progress);
-                };
-                uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                    console.info('onSuccessItem', fileItem, response, status, headers);
-                };
-                uploader.onErrorItem = function(fileItem, response, status, headers) {
-                    console.info('onErrorItem', fileItem, response, status, headers);
-                };
-                uploader.onCancelItem = function(fileItem, response, status, headers) {
-                    console.info('onCancelItem', fileItem, response, status, headers);
-                };*/
-        
-
-
-        $scope.addSlide = function () {
-            var newWidth = 600 + imagesMock.length + 1;
-
-            imagesMock.push({
-                image: '//unsplash.it/' + newWidth + '/300',
-                //text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-                //id: currIndex++
-            });
-        };
-
-        $scope.addSlide();
-        $scope.addSlide();
-        $scope.addSlide();
-
-        var imagesJson = JSON.stringify(imagesMock);
-        var oneImage = [{
-            image: '//unsplash.it/' + 600 + '/300'
-        }];
-        var oneImageJson = JSON.stringify(oneImage);
-
-        var productResponse = [{
-            "id":1,
-            "nombre": "Cox",
-            "descripcion": "Carney",
-            "banda":"banda",
-            "cantidad":"",
-            "precio": "10",
-            "tipo": "Enormo",
-            "descuento": true,
-            "data": imagesJson
-        }, {
-            "id":1,
-            "nombre": "Lorraine",
-            "descripcion": "Wise",
-            "banda":"banda",
-            "cantidad":"",
-            "precio": "124",
-            "tipo": "Comveyer",
-            "descuento": false,
-            "data": oneImageJson
-        }, {
-            "id":1,
-            "nombre": "Nancy",
-            "descripcion": "Waters",
-            "banda":"banda",
-            "cantidad":"",
-            "precio": "75",
-            "tipo": "Comveyer",
-            "descuento": false,
-            "data": imagesJson
-        }];
-
-        $scope.gridOptions.data = productResponse;
-
-
-        function getProcecedObjects(array){
-            var proceced = {};
-            if(array !== undefined && array !== null){
-                array.forEach(function(element) {
-                    processElement(element);
-                });
-            }
-            return array;
-        }
-
-        function processElement(obj){
-            if(obj.data !== undefined && obj.data !== null){
-                var images = JSON.parse(obj.data);
-                console.info("images:",images,"data:",obj.data);
-                if(images !== undefined && images !== null){
-                    var i = 0;
-                    obj.images = [];
-                    images.forEach(function(element) {
-                        console.log("element",element);
-                        obj.images.push({
-                            image: element.image,
-                            text: '',
-                            id: i++
-                        });
-                    });
-                    obj.firstImage = images[0];
-                }
-            }
-        }
-        
-        /* -------     carousel       -------------  */
-
-
-
-        // for (var i = 0; i < 3; i++) {
-        //     $scope.addSlide();
+        // function getProcecedObjects(array){
+        //     var proceced = {};
+        //     if(array !== undefined && array !== null){
+        //         array.forEach(function(element) {
+        //             processElement(element);
+        //         });
+        //     }
+        //     return array;
         // }
+
+        // function processElement(obj){
+        //     if(obj.data !== undefined && obj.data !== null){
+        //         var images = JSON.parse(obj.data);
+        //         console.info("images:",images,"data:",obj.data);
+        //         if(images !== undefined && images !== null){
+        //             var i = 0;
+        //             obj.images = [];
+        //             images.forEach(function(element) {
+        //                 console.log("element",element);
+        //                 obj.images.push({
+        //                     image: element.image,
+        //                     text: '',
+        //                     id: i++
+        //                 });
+        //             });
+        //             obj.firstImage = images[0];
+        //         }
+        //     }
+        // }
+        
+
    });
