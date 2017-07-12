@@ -9,14 +9,12 @@
  */
 
  angular.module('tplaboratorioIv2016App')
-   .controller('usersCtrl', function ($scope,$location, $anchorScroll,users,shop,$state){
+   .controller('usersCtrl', function ($scope,$location, $anchorScroll,users,shop,$state,servicioLogin){
 
         //Methods
         this.columnDefinition = columnDefinition;
         this.editarElemento = $scope.editarElemento = editarElemento;
         this.eliminarElemento = $scope.eliminarElemento = eliminarElemento;
-        // this.processElement = processElement;
-        // this.getProcecedObjects = getProcecedObjects;
         $scope.CancelAndClean = CancelAndClean;
 
         //Variables
@@ -133,19 +131,7 @@
         $scope.gridOptions.enableColumnMenus = false;
         $scope.gridOptions.columnDefs = columnDefinition();
 
-        $scope.noWrapSlides = false;
-        $scope.active = 0;
-        var slides = $scope.slides = [];
-        var imagesMock = [];
-        var currIndex = 0;
 
-        // to use when it load the page
-        var oneSlide = {
-                image: 'http://via.placeholder.com/300x200?text=Sin+imagen',
-                text: 'no image',
-                id: 1
-            };
-        $scope.slides.push(oneSlide);
 
 
         function editarElemento(row){
@@ -200,44 +186,5 @@
         $scope.change = function (value) {
             console.info("element", value);
         };
-
-        // $scope.buttonClick = function(){
-        //     var objectPr = JSON.stringify(slides);
-        //     console.info("stringigy",objectPr);
-        // };
-
-
-
-
-        // function getProcecedObjects(array){
-        //     var proceced = {};
-        //     if(array !== undefined && array !== null){
-        //         array.forEach(function(element) {
-        //             processElement(element);
-        //         });
-        //     }
-        //     return array;
-        // }
-
-        // function processElement(obj){
-        //     if(obj.data !== undefined && obj.data !== null){
-        //         var images = JSON.parse(obj.data);
-        //         console.info("images:",images,"data:",obj.data);
-        //         if(images !== undefined && images !== null){
-        //             var i = 0;
-        //             obj.images = [];
-        //             images.forEach(function(element) {
-        //                 console.log("element",element);
-        //                 obj.images.push({
-        //                     image: element.image,
-        //                     text: '',
-        //                     id: i++
-        //                 });
-        //             });
-        //             obj.firstImage = images[0];
-        //         }
-        //     }
-        // }
-        
 
    });
