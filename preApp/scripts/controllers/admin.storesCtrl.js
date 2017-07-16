@@ -10,7 +10,7 @@
 
  angular.module('tplaboratorioIv2016App')
    .controller('storesCtrl', function ($scope,FileUploader,$location, $anchorScroll, shop,$state){
-this.columnDefinition = columnDefinition;
+        this.columnDefinition = columnDefinition;
         this.editarElemento = $scope.editarElemento = editarElemento;
         this.eliminarElemento = $scope.eliminarElemento = eliminarElemento;
         this.updateImages = updateImages;
@@ -19,7 +19,9 @@ this.columnDefinition = columnDefinition;
         $scope.CancelAndClean = CancelAndClean;
         $scope.isUpdate = false;
         $scope.producto = {};
-        var imagesToUpload = [];
+        var slides = $scope.slides = [];
+        var currIndex = 0;
+
         $scope.imagesUploaded = false;
         $scope.showAlert = false;
         $scope.gridOptions = {
@@ -73,9 +75,7 @@ this.columnDefinition = columnDefinition;
 
         $scope.noWrapSlides = false;
         $scope.active = 0;
-        var slides = $scope.slides = [];
-        var imagesMock = [];
-        var currIndex = 0;
+
 
         shop.obtenerTodos().then(function (response) {
             $scope.gridOptions.data = response.data;
@@ -88,7 +88,7 @@ this.columnDefinition = columnDefinition;
         });
 
         $scope.createOrUpdate = function () {
-            if (imagesToUpload.length > 0 && !$scope.imagesUploaded) {
+            if ( uploader.queue.length > 0 && !$scope.imagesUploaded) {
                 $scope.showAlert = true;
             } else {
                 if ($scope.isUpdate) {
@@ -98,7 +98,7 @@ this.columnDefinition = columnDefinition;
                     });
                 } else {
                     updateImages($scope.producto);
-                    console.info($scope.producto);
+                    // console.info($scope.producto);
                     shop.Agregar($scope.producto).then(function (respuesta) {
                         $state.reload();
                     });
@@ -131,14 +131,14 @@ this.columnDefinition = columnDefinition;
         function editarElemento(row) {
             $scope.slides = [];
             currIndex = 0;
-            console.info(row);
+            // console.info(row);
             // processElement(row.entity);
             $scope.producto = row.entity;
             // $scope.slides = row.entity.images;
             addSlide(row.entity.image1);
             addSlide(row.entity.image2);
             addSlide(row.entity.image3);
-
+            currIndex = 0;
             $location.hash('top');
             // call $anchorScroll()
             $anchorScroll();
@@ -220,8 +220,6 @@ this.columnDefinition = columnDefinition;
         uploader.filters.push({
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/ , options) {
-                imagesToUpload.push(item);
-                console.info("array", imagesToUpload);
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
@@ -229,62 +227,24 @@ this.columnDefinition = columnDefinition;
 
 
         uploader.onCompleteItem = function (fileItem, response, status, headers) {
-            imagesToUpload = [];
-            $scope.slides.push({
+            $scope.slides[currIndex] = {
                 image: response,
                 text: '',
-                id: currIndex++
-            });
-            console.info('onCompleteItem', response);
+                id: currIndex
+            };
+            currIndex++;
         };
         uploader.onCompleteAll = function (response, status, headers) {
             $scope.showAlert = false;
-            imagesToUpload = [];
-            console.info('onCompleteAll', response);
+            currIndex = 0;
+            // console.info('onCompleteAll', response);
             uploader.clearQueue();
             $scope.imagesUploaded = true;
         };
 
-        /* -----------------------TESTING ------------------------------------------*/
-
-
-
-        // CALLBACKS
-
-        /*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
-                    console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-                uploader.onAfterAddingFile = function(fileItem) {
-                    console.info('onAfterAddingFile', fileItem);
-                    $scope.showAlert = true;
-                };
-                uploader.onAfterAddingAll = function(addedFileItems) {
-                    console.info('onAfterAddingAll', addedFileItems);
-                };
-                uploader.onBeforeUploadItem = function(item) {
-                    console.info('onBeforeUploadItem', item);
-                };
-                uploader.onProgressItem = function(fileItem, progress) {
-                    console.info('onProgressItem', fileItem, progress);
-                };
-                uploader.onProgressAll = function(progress) {
-                    console.info('onProgressAll', progress);
-                };
-                uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                    console.info('onSuccessItem', fileItem, response, status, headers);
-                };
-                uploader.onErrorItem = function(fileItem, response, status, headers) {
-                    console.info('onErrorItem', fileItem, response, status, headers);
-                };
-                uploader.onCancelItem = function(fileItem, response, status, headers) {
-                    console.info('onCancelItem', fileItem, response, status, headers);
-                };*/
-
 
 
         function addSlide(url) {
-            var newWidth = 600 + imagesMock.length + 1;
-
             $scope.slides.push({
                 image: url,
                 text: 'a',

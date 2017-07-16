@@ -122,7 +122,10 @@
                                 <br/>
                                 <br/>
                             </div>
-                            <center><button type="button" class="btn btn-primary" ng-click="buttonClick()">Submit</button></center>
+                            <center>
+                                <button type="button" class="btn btn-primary" ng-disabled="producto.state === 'entregado'" ng-click="createOrUpdate()">{{ isUpdate ? 'Actualizar' : 'Nuevo' }}</button>
+                                <button type="button" class="btn btn-primary" ng-click="CancelAndClean()">Cancelar y limpiar</button>
+                            </center>
                             <br/>
                         </div>
                     </div>

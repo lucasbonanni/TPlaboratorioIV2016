@@ -16,10 +16,15 @@ angular.module('tplaboratorioIv2016App')
         this.updateImages = updateImages;
         this.addSlide = addSlide;
         this.getProcecedObjects = getProcecedObjects;
+
+
         $scope.CancelAndClean = CancelAndClean;
         $scope.isUpdate = false;
         $scope.producto = {};
-        var imagesToUpload = [];
+        $scope.noWrapSlides = false;
+        $scope.active = 0;
+        var slides = $scope.slides = [];
+        var currIndex = 0;
         $scope.imagesUploaded = false;
         $scope.showAlert = false;
         $scope.gridOptions = {
@@ -71,11 +76,7 @@ angular.module('tplaboratorioIv2016App')
         $scope.gridOptions.enableColumnMenus = false;
         $scope.gridOptions.columnDefs = columnDefinition();
 
-        $scope.noWrapSlides = false;
-        $scope.active = 0;
-        var slides = $scope.slides = [];
-        var imagesMock = [];
-        var currIndex = 0;
+
 
         productos.obtenerTodos().then(function (response) {
             $scope.gridOptions.data = response.data;
@@ -88,7 +89,7 @@ angular.module('tplaboratorioIv2016App')
         });
 
         $scope.createOrUpdate = function () {
-            if (imagesToUpload.length > 0 && !$scope.imagesUploaded) {
+            if (uploader.queue.length > 0 && !$scope.imagesUploaded) {
                 $scope.showAlert = true;
             } else {
                 if ($scope.isUpdate) {
@@ -98,7 +99,7 @@ angular.module('tplaboratorioIv2016App')
                     });
                 } else {
                     updateImages($scope.producto);
-                    console.info($scope.producto);
+                    // console.info($scope.producto);
                     productos.Agregar($scope.producto).then(function (respuesta) {
                         $state.reload();
                     });
@@ -235,62 +236,23 @@ angular.module('tplaboratorioIv2016App')
 
 
         uploader.onCompleteItem = function (fileItem, response, status, headers) {
-            imagesToUpload = [];
+            // imagesToUpload = [];
             $scope.slides.push({
                 image: response,
                 text: '',
                 id: currIndex++
             });
-            console.info('onCompleteItem', response);
+            // console.info('onCompleteItem', response);
         };
         uploader.onCompleteAll = function (response, status, headers) {
             $scope.showAlert = false;
-            imagesToUpload = [];
-            console.info('onCompleteAll', response);
+            currIndex = 0;
             uploader.clearQueue();
             $scope.imagesUploaded = true;
         };
 
-        /* -----------------------TESTING ------------------------------------------*/
-
-
-
-        // CALLBACKS
-
-        /*        uploader.onWhenAddingFileFailed = function(item {File|FileLikeObject}, filter, options) {
-                    console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-                uploader.onAfterAddingFile = function(fileItem) {
-                    console.info('onAfterAddingFile', fileItem);
-                    $scope.showAlert = true;
-                };
-                uploader.onAfterAddingAll = function(addedFileItems) {
-                    console.info('onAfterAddingAll', addedFileItems);
-                };
-                uploader.onBeforeUploadItem = function(item) {
-                    console.info('onBeforeUploadItem', item);
-                };
-                uploader.onProgressItem = function(fileItem, progress) {
-                    console.info('onProgressItem', fileItem, progress);
-                };
-                uploader.onProgressAll = function(progress) {
-                    console.info('onProgressAll', progress);
-                };
-                uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                    console.info('onSuccessItem', fileItem, response, status, headers);
-                };
-                uploader.onErrorItem = function(fileItem, response, status, headers) {
-                    console.info('onErrorItem', fileItem, response, status, headers);
-                };
-                uploader.onCancelItem = function(fileItem, response, status, headers) {
-                    console.info('onCancelItem', fileItem, response, status, headers);
-                };*/
-
-
 
         function addSlide(url) {
-            var newWidth = 600 + imagesMock.length + 1;
-
             $scope.slides.push({
                 image: url,
                 text: 'a',
