@@ -9,7 +9,7 @@
  */
 
 angular.module('tplaboratorioIv2016App')
-  .controller('ProductSummaryCtrl', function($scope, $cookies,NgMap,servicioLogin,$state, orders, orderDetail) {
+  .controller('ProductSummaryCtrl', function($scope, $cookies,NgMap,servicioLogin,$state, orders, orderDetail,shop) {
     $scope.usuario = {};
     $scope.cliente = cliente;
     $scope.empleado = empleado;
@@ -33,11 +33,25 @@ angular.module('tplaboratorioIv2016App')
     $scope.name = '';
     $scope.userId = 0;
     $scope.producto = {};
+    $scope.positions = [];
     if($scope.isLoged){
        var payload = servicioLogin.getPayload()
        $scope.name = payload.name;
        $scope.userId = payload.id;
     }
+    shop.obtenerTodos().then(function(rta){
+      $scope.shops = rta.data;
+      $scope.shops.forEach(function(element) {
+        var street = element.street + ',' + element.city;
+        $scope.positions.push(street);
+      });
+
+    },function (error){
+        $scope.positions = [];
+        $scope.positions.push([-34.605044, -58.382430]);
+        $scope.positions.push([-34.608779, -58.436673]);
+        $scope.positions.push([-34.552305, -58.451438]);
+    });
     //$scope.lat = -34.605044, $scope.lng = -58.382430;
     $scope.lat = -34.577877; $scope.lng = -58.427484;
     //-34.577877, -58.427484
@@ -164,9 +178,9 @@ angular.module('tplaboratorioIv2016App')
     function MejorDistancia(){
         
         // var origin2 = 'Greenwich, England';
-        var destinationA = new google.maps.LatLng(-34.605044, -58.382430);
-        var destinationB = new google.maps.LatLng(-34.608779, -58.436673);
-        var destinationC = new google.maps.LatLng(-34.552305, -58.451438);
+        // var destinationA = new google.maps.LatLng(-34.605044, -58.382430);
+        // var destinationB = new google.maps.LatLng(-34.608779, -58.436673);
+        // var destinationC = new google.maps.LatLng(-34.552305, -58.451438);
         var origins = [];
         if($scope.direction === ''){
           var origin1 = new google.maps.LatLng($scope.lat, $scope.lng);
@@ -178,7 +192,7 @@ angular.module('tplaboratorioIv2016App')
         var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix(
           {
-            origins: [destinationA, destinationB,destinationC],
+            origins: $scope.positions,
             destinations: origins,
             travelMode: 'DRIVING',
           }, callback);
@@ -216,11 +230,11 @@ angular.module('tplaboratorioIv2016App')
     }
 
 
-    $scope.positions = [];
+    // $scope.positions = [];
 
-    $scope.positions.push([-34.605044, -58.382430]);
-    $scope.positions.push([-34.608779, -58.436673]);
-    $scope.positions.push([-34.552305, -58.451438]);
+    // $scope.positions.push([-34.605044, -58.382430]);
+    // $scope.positions.push([-34.608779, -58.436673]);
+    // $scope.positions.push([-34.552305, -58.451438]);
 
     //  $scope.mapMarkers.push({
     //     title: 'Hola',
@@ -253,6 +267,7 @@ angular.module('tplaboratorioIv2016App')
         }
 
         $scope.createOrUpdate = function () {
+          var expireDate = new Date();
             $scope.producto.userId = $scope.userId;
             $scope.producto.totalPrice = $scope.totalPrice;
             $scope.producto.userName = $scope.name;
@@ -273,6 +288,9 @@ angular.module('tplaboratorioIv2016App')
 
                         });
                     });
+                });
+                $cookies.putObject('carrito', {}, {
+                  'expires': expireDate
                 });
                 $state.go('shop.home');
             });
