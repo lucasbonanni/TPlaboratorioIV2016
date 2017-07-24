@@ -1,57 +1,87 @@
 angular
-  .module('tplaboratorioIv2016App')
-  .factory('permisosFactory', function ($http, servicioLogin) {
-
-  	var profile = {};
-  	var defaultView;
-
-  	function isAuthenticated(){
-  		getPayload();
-  		return servicioLogin.isAuthenticated();
-  	};
-
-  	function getPayload(){
-  		var payload = {};
+    .module('tplaboratorioIv2016App')
+    .factory('permisosFactory', function ($http, servicioLogin) {
+        var profile = '';
+        var defaultView = '';
+        var payload = {};
         payload = servicioLogin.getPayload();
-  		if(payload){
-  			profile = payload['perfil'];
-  		
-      		if(payload['defaultView']){
-      			defaultView = payload['defaultView'];
-      		}
-        }
-        else
-        {
+        // console.info('payload', payload);
+        if (payload) {
+            profile = payload.profile;
+
+            if (payload['defaultView']) {
+                defaultView = payload.defaultView;
+            }
+        } else {
             profile = '';
         }
-  	};
 
-  	function isAdministrator(){
-        if(profile == 'A' || profile == 'administrador')
-        {
-            return true;
+
+        var objeto = {};
+
+
+
+        objeto.isAuthenticated = function () {
+            getPayload();
+            return servicioLogin.isAuthenticated();
         }
-        return false;
-  	};
 
-  	function isUser(){
-        if(profile == 'C' || profile == 'user')
-        {
-            return true;
+        function getPayload() {
+            var payload = {};
+            payload = servicioLogin.getPayload();
+            console.info('payload', payload);
+            if (payload) {
+                profile = payload.profile;
+
+                if (payload['defaultView']) {
+                    defaultView = payload.defaultView;
+                }
+            } else {
+                profile = '';
+            }
         }
-        return false;
-  	};
 
-    function getDefaultView() {
-        return defaultView;
-    };
+        objeto.isAdministrator = function () {
+            if (profile == 'A' || profile == 'administrador') {
+                return true;
+            }
+            return false;
+        }
 
-    var objecto = {};
+        objeto.isClient = function () {
+            if (profile == 'C' || profile == 'cliente') {
+                return true;
+            }
+            return false;
+        }
 
-    objecto.isAuthenticated = isAuthenticated;
-    objecto.getPayload = getPayload;
-    objecto.isAdministrator = isAdministrator;
-    objecto.isUser = isUser;
-    return objecto;
+        objeto.isManager = function () {
+            if (profile == 'ENC' || profile == 'encargado') {
+                return true;
+            }
+            return false;
+        }
 
-  });
+        objeto.isEmployee = function () {
+            if (profile == 'EMP' || profile == 'empleado') {
+                return true;
+            }
+            return false;
+        }
+
+
+        objeto.hasBackOfficeAccess = function () {
+            return objeto.isAdministrator() || objeto.isManager() || objeto.isEmployee();
+        }
+
+        objeto.getDefaultView = function () {
+            return defaultView;
+        }
+
+        objeto.logout = function () {
+            return servicioLogin.logout();
+        }
+
+
+        return objeto;
+    });
