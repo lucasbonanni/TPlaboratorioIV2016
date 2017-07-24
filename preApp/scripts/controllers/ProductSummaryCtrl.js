@@ -247,13 +247,13 @@ angular.module('tplaboratorioIv2016App')
       //-34.552305, -58.451438
 
         function cliente() {
-            $scope.usuario.email = 'amerigot1@bravesites.com';
-            $scope.usuario.password = '53507';
+            $scope.usuario.email = 'jfollis0@blogtalkradio.com';
+            $scope.usuario.password = '123456';
         }
 
         function empleado() {
-            $scope.usuario.email = 'amerigot1@bravesites.com';
-            $scope.usuario.password = '53507';
+            $scope.usuario.email = 'balliband8@reddit.com';
+            $scope.usuario.password = '6496';
         }
 
         function encargado() {
@@ -262,10 +262,10 @@ angular.module('tplaboratorioIv2016App')
         }
 
         function administrador() {
-            $scope.usuario.email = 'amerigot1@bravesites.com';
-            $scope.usuario.password = '53507';
+            $scope.usuario.email = 'nstollmeyer2@zimbio.com';
+            $scope.usuario.password = '83790';
         }
-
+          
         $scope.createOrUpdate = function () {
           var expireDate = new Date();
             $scope.producto.userId = $scope.userId;
