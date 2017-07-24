@@ -11,23 +11,33 @@
           <tr class="row" ng-if="!isLoged">
             <td class="col-sm-12">
 
-              <form class="form-horizontal has-feedback">
+              <form class="form-horizontal has-feedback" name="loginReg">
                 <div class="control-group">
                   <label class="col-sm-2 col-sm-offset-2 control-label" for="inputUsername">Usuario</label>
                   <div class="col-sm-4">
-                    <input type="text" id="inputUsername" placeholder="usuario" class="form-control" required>
+                    <input type="email" id="inputUsername" name="email" ng-model="usuario.email" placeholder="usuario" class="form-control" required>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="col-sm-2 col-sm-offset-2 control-label" for="inputPassword1">Contraseña</label>
                   <div class="col-sm-4">
-                    <input type="password" id="inputPassword1" placeholder="contraseña" class="form-control" required>
+                    <input type="password" id="inputPassword1" name="password" ng-model="usuario.password" placeholder="contraseña" class="form-control" required>
                   </div>
                 </div>
                 <div class="control-group">
                   <div class="col-sm-4 col-sm-offset-4">
-                    <button type="submit" class="btn btn-info">Ingresar</button> o <a ui-sref="shop.register" class="btn btn-success">Registrarse!</a>
+                    <center><button type="submit" class="btn btn-info" ng-disabled="loginReg.email.$invalid || loginReg.password.$invalid" ng-click="loguarse()" >Ingresar</button> o <a ui-sref="shop.register" class="btn btn-success">Registrarse!</a> </center>
                   </div>
+                </div>
+                <div class="form-group has-feedback">
+                  <center>
+                    <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-success btn-xs" ng-click="cliente()">Cliente</button>
+                      <button type="button" class="btn btn-info btn-xs" ng-click="empleado()">Empleado</button>
+                      <button type="button" class="btn btn-warning btn-xs" ng-click="encargado()">Encargado</button>
+                      <button type="button" class="btn btn-danger btn-xs" ng-click="administrador()">Administrador</button>
+                    </div>
+                  </center>
                 </div>
                 <!--div class="control-group">
                   <div class="controls">
@@ -182,7 +192,7 @@
           </tr>
         </table>
         <a class="btn btn-large" ui-sref="shop.home"><i class="icon-arrow-left"></i> Continuar comprando! </a>
-        <a href="login.html" class="btn btn-large pull-right" ng-disabled="true">Finalizar compra! <i class="icon-arrow-right"></i></a>
+        <a class="btn btn-large pull-right" ng-disabled="!isLoged" ng-click="createOrUpdate()">Finalizar compra! <i class="icon-arrow-right"></i></a>
 
       </div>
     </div>

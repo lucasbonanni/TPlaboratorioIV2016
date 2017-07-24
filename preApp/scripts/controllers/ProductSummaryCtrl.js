@@ -9,7 +9,13 @@
  */
 
 angular.module('tplaboratorioIv2016App')
-  .controller('ProductSummaryCtrl', function($scope, $cookies,NgMap) {
+  .controller('ProductSummaryCtrl', function($scope, $cookies,NgMap,servicioLogin,$state, orders, orderDetail) {
+    $scope.usuario = {};
+    $scope.cliente = cliente;
+    $scope.empleado = empleado;
+    $scope.encargado = encargado;
+    $scope.administrador = administrador;
+    $scope.loguarse = loguarse;
     $scope.carrito = [];
     $scope.discount = 0;
     $scope.tax = 1.10;
@@ -23,7 +29,15 @@ angular.module('tplaboratorioIv2016App')
     $scope.directionDestination = '';
     $scope.showDistance = '';
     $scope.distanceValue = 0;
-    $scope.isLoged = false;
+    $scope.isLoged = servicioLogin.isAuthenticated();
+    $scope.name = '';
+    $scope.userId = 0;
+    $scope.producto = {};
+    if($scope.isLoged){
+       var payload = servicioLogin.getPayload()
+       $scope.name = payload.name;
+       $scope.userId = payload.id;
+    }
     //$scope.lat = -34.605044, $scope.lng = -58.382430;
     $scope.lat = -34.577877; $scope.lng = -58.427484;
     //-34.577877, -58.427484
@@ -41,7 +55,6 @@ angular.module('tplaboratorioIv2016App')
                 $scope.lng = position.coords.longitude;
     });
 
-    $scope.isloged = false;
 
     $scope.increase = function(element) {
       $scope.storedValues.push(element);
@@ -136,6 +149,17 @@ angular.module('tplaboratorioIv2016App')
 
 
 
+    function loguarse(){
+        servicioLogin.doLogin($scope.usuario).then (function(rta){
+          $state.reload();
+        }, function(error){
+          servicioLogin.doLogin($scope.usuario).then (function(rta){
+            $state.reload();
+          }, function(error){
+            alert(error);
+          });
+        });
+      }
 
     function MejorDistancia(){
         
@@ -208,6 +232,52 @@ angular.module('tplaboratorioIv2016App')
       //-34.608779, -58.436673
       //-34.552305, -58.451438
 
+        function cliente() {
+            $scope.usuario.email = 'amerigot1@bravesites.com';
+            $scope.usuario.password = '53507';
+        }
 
+        function empleado() {
+            $scope.usuario.email = 'amerigot1@bravesites.com';
+            $scope.usuario.password = '53507';
+        }
+
+        function encargado() {
+            $scope.usuario.email = 'amerigot1@bravesites.com';
+            $scope.usuario.password = '53507';
+        }
+
+        function administrador() {
+            $scope.usuario.email = 'amerigot1@bravesites.com';
+            $scope.usuario.password = '53507';
+        }
+
+        $scope.createOrUpdate = function () {
+            $scope.producto.userId = $scope.userId;
+            $scope.producto.totalPrice = $scope.totalPrice;
+            $scope.producto.userName = $scope.name;
+            $scope.producto.date = new Date();
+            $scope.producto.userStreet = $scope.direction;
+            orders.Agregar($scope.producto).then(function (respuesta) {
+                $scope.carrito.forEach(function(element) {
+                    console.info( respuesta.data);
+                    element.orderId = respuesta.data.id;
+                    orderDetail.Agregar(element).then(function(rst){
+                        // continue;
+                    },
+                    function(error){
+                        orderDetail.Agregar(element).then(function(rta){
+                            // continue;
+                        },
+                        function(error){
+
+                        });
+                    });
+                });
+                $state.go('shop.home');
+            });
+
+            
+        };
 
   });
