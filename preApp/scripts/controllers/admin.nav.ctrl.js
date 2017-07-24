@@ -86,15 +86,15 @@ angular.module('tplaboratorioIv2016App')
             }
         ];
 
-        var perfil = "admin"; // get the profile
-
-        if (perfil === 'admin') {
+       
+        if(permisosFactory.isAdministrator()){
             $scope.sideNavItems = adminMenu;
-        } else if (perfil === 'enc') {
+        }else if(permisosFactory.isManager()){
             $scope.sideNavItems = encargadoMenu;
-        } else if (perfil === 'emp') {
+        }else if(permisosFactory.isEmployee()){
             $scope.sideNavItems = empleadoMneu;
         }
+
 
         function logout(){
             console.log('logout');
@@ -102,11 +102,4 @@ angular.module('tplaboratorioIv2016App')
             $state.go('shop.home');
         }
 
-        // $scope.userName = 'Lucas Bonanni';
-
-        /*
-        administrador: empleados y locales
-        Encargado: empleados, productos, ofertas
-        Empleado: pedidos, clientes, productos, ofertas        
-         */
     });
