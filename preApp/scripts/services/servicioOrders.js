@@ -28,6 +28,11 @@ angular
   	this.Agregar = function(producto){
   		var url = routeFactory.getApiRoute(ordersPath);
         return $http.post(url,producto);
+	};
+	
+	this.chartInfo = function(){
+  		var url = routeFactory.getApiRoute(ordersPath + '/amount-by-month/asd');
+        return $http.get(url);
   	};
 
 

@@ -9,14 +9,27 @@
  */
 
  angular.module('tplaboratorioIv2016App')
-   .controller('principalCtrl', function ($scope){
+   .controller('principalCtrl', function ($scope, orders){
+    $scope.months = [];
+    $scope.amounts = [];
+        $scope.data = {
+    labels: $scope.months,
+    series: [$scope.amounts]};
+    // this.createAmounts = createAmounts; 
+    orders.chartInfo().then(
+        function(rta){
+        var array = rta.data;
+        console.log(array);
+        array.forEach(function(element) {
+            // console.log(element);
+            $scope.months.push(element.month);
+            $scope.amounts.push(parseInt(element.totalamount));
+        });
+    },function(error){
 
-    $scope.data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    series: [
-          [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8]
-      ]
-    };
+    });
+
+
 
     $scope.options = {
         seriesBarDistance: 10,
