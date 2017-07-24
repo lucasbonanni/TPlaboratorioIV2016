@@ -1,9 +1,19 @@
 'use strict';
 
 angular.module('tplaboratorioIv2016App')
-    .controller('adminNavCtrl', function ($scope) {
+    .controller('adminNavCtrl', function ($scope, permisosFactory,$state,servicioLogin) {
         // $scope.sideNavItems = [{text: 'Products', state: 'admin.products',iconClass: 'fa fa-chevron-right'}];
 
+        $scope.isLogin = permisosFactory.isAuthenticated();
+        $scope.userName = '';
+        if($scope.isLogin){
+            var payload = servicioLogin.getPayload();
+            $scope.userName = payload.name;
+        }
+        $scope.logout = logout;
+
+
+        
         var adminMenu = [{
                 text: 'Principal',
                 state: 'admin.dashboard',
@@ -86,8 +96,13 @@ angular.module('tplaboratorioIv2016App')
             $scope.sideNavItems = empleadoMneu;
         }
 
+        function logout(){
+            console.log('logout');
+            permisosFactory.logout();
+            $state.go('shop.home');
+        }
 
-        $scope.userName = 'Lucas Bonanni';
+        // $scope.userName = 'Lucas Bonanni';
 
         /*
         administrador: empleados y locales
