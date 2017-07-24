@@ -165,53 +165,77 @@ angular
                     nav: adminNav
                 }
             });
-            // .state('usuarios', {
-            //     url: '/usuarios',
-            //     templateUrl: 'views/usuarios.html',
-            //     controller: 'UsuariosCtrl'
-            // })
-            // .state('altaProducto', {
-            //     url: '/altaProducto?id',
-            //     templateUrl: 'views/altaproducto.html',
-            //     controller: 'AltaproductoCtrl'
-            // })
-            // .state('altaUsuario', {
-            //     url: '/altaUsuario?id',
-            //     templateUrl: 'views/altausuario.html',
-            //     controller: 'AltausuarioCtrl'
-            // });
+
         $urlRouterProvider.otherwise('/');
     })
-    .run(function ($rootScope, $location , servicioLogin,permisosFactory , $auth ,$state) {
+    .run(function ($rootScope, $location, $auth ,$state) {
+
+        var profile = '';
+        var defaultView = '';
+        var payload = $auth.getPayload();
+        profile = payload.profile;
+
+        var isAdministrator = function () {
+            if (profile == 'A' || profile == 'administrador') {
+                return true;
+            }
+            return false;
+        }
+
+         var isClient = function () {
+            if (profile == 'C' || profile == 'cliente') {
+                return true;
+            }
+            return false;
+        }
+
+        var isManager = function () {
+            if (profile == 'ENC' || profile == 'encargado') {
+                return true;
+            }
+            return false;
+        }
+
+        var isEmployee = function () {
+            if (profile == 'EMP' || profile == 'empleado') {
+                return true;
+            }
+            return false;
+        }
+
+
+         function hasBackOfficeAccess() {
+            return isAdministrator() || isManager() || isEmployee();
+        }
+
+
+        var isAdminRoute = function(route){
+            var basePath = route.split('.')[0];
+            // console.log('base path', basePath);
+            if(basePath == 'admin'){
+                return true;
+            }
+            return false;
+        }
+
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams, options) {
             var hash = $location.hash();
             if (hash) {
                 toParams['#'] = hash;
             }
 
-            if ( toState.data.auth === 'EnterpriseAdmin' && !user.isAdmin() ) {
+            // isAdminRoute(toState.name);
+            // console.log('state name',toState.name, 'tostate', toState);
+
+            // console.log('isadmin',isAdminRoute(toState.name),'hasBackOfficeAccess' ,permisosFactory.hasBackOfficeAccess(),'isAuthenticated ', permisosFactory.isAuthenticated());
+            if (( isAdminRoute(toState.name) && !hasBackOfficeAccess()) || (isAdminRoute(toState.name) && !$auth.isAuthenticated())) {
+
                     ///event prevent default stop the transition
                     event.preventDefault();
 
                     // return trans.router.stateService.target('shop.login');
                     return $state.go('shop.login', {error:false}    );
             }
-    //             if (toState.data.hasOwnProperty('auth') && toState.data.auth === true) {
-    //   // do authy stuff
-    // }
-            /*permisosFactory.getPayload();
-            $rootScope.isAdministrator = permisosFactory.isAdministrator();
-            $rootScope.isUser = permisosFactory.isUser();
-            console.info("state change isAdmin",permisosFactory.isAdministrator());
-            console.info("state change isAuthenticated",$auth.isAuthenticated());
 
-            if(servicioLogin.isAuthenticated()){
-
-                //get payload of authFactory
-                //if is authenticated do nothing
-            } else
-            {
-                //if not autenticated redirecte to home
-            }*/
         });
     });
