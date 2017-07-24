@@ -76,7 +76,8 @@ angular.module('tplaboratorioIv2016App')
 
         if (permisosFactory.isAuthenticated()) {
             if(permisosFactory.isAdministrator()){
-
+                $scope.navMenuItems = adminMenu;
+                $scope.isLogin = true;
             }else if(permisosFactory.hasBackOfficeAccess())
             {
                 $scope.navMenuItems = adminMenu;
