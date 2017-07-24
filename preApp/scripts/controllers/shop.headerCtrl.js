@@ -1,28 +1,33 @@
 'use strict';
 
 angular.module('tplaboratorioIv2016App')
-  .controller('shopHeaderCtrl', function ($scope) {
-    $scope.items = 10;
-    $scope.totalprice = 100;
-    $scope.navMenuItems = [];
-    var isAdmin = false;
-    var isEnc = false;
-    var isEmp = false;
-    var isClient = true;
-    var isLogin = false;
+    .controller('shopHeaderCtrl', function ($scope, permisosFactory,$state,servicioLogin) {
+        $scope.items = 10;
+        $scope.totalprice = 100;
+        $scope.navMenuItems = [];
+        $scope.isLogin = permisosFactory.isAuthenticated();
+        $scope.userName = '';
+        if($scope.isLogin){
+            var payload = servicioLogin.getPayload();
+            $scope.userName = payload.name;
+        }
+        $scope.logout = logout;
 
-
-      var invitedMenu = [{
+        var invitedMenu = [{
                 text: 'Principal',
                 state: 'shop.home',
                 iconClass: 'fa fa-tachometer'
+            },
+            {
+                text: 'Resumen',
+                state: 'shop.productSummary',
+                iconClass: 'fa fa-building'
             },
             {
                 text: 'Login',
                 state: 'shop.login',
                 iconClass: 'fa fa-building'
             },
-
             {
                 text: 'Encuesta',
                 state: 'shop.contact',
@@ -30,7 +35,7 @@ angular.module('tplaboratorioIv2016App')
             }
         ];
 
-      var clientMenu = [{
+        var clientMenu = [{
                 text: 'Principal',
                 state: 'shop.home',
                 iconClass: 'fa fa-tachometer'
@@ -69,21 +74,30 @@ angular.module('tplaboratorioIv2016App')
             }
         ];
 
-    var adminAcces = $scope.isAdmin || $scope.isEnc || $scope.isClient;
+        if (permisosFactory.isAuthenticated()) {
+            if(permisosFactory.isAdministrator()){
 
-    /*
-      console.info($scope.isAdmin || $scope.isEnc || $scope.isClient);
-      console.info("invitado",!$scope.isLogin && !adminAcces);
-      console.info("cliente",$scope.isLogin && !adminAcces);
-      console.info("admin", $scope.isLogin && adminAcces);*/
+            }else if(permisosFactory.hasBackOfficeAccess())
+            {
+                $scope.navMenuItems = adminMenu;
+                $scope.isLogin = true;
+            }else if(permisosFactory.isClient()){ 
+                $scope.navMenuItems = clientMenu;
+                $scope.isLogin = true;
+            }
+            else{
+                $scope.navMenuItems = invitedMenu;
+            }
 
-      if (!isLogin && !adminAcces) {
-          $scope.navMenuItems = invitedMenu;
-      } else if (isLogin && !adminAcces) {
-          $scope.navMenuItems = clientMenu;
-      } else if (isLogin && adminAcces) {
-          $scope.navMenuItems = adminMenu;
-      }
-      
+        } else {
+            $scope.navMenuItems = invitedMenu;
+        }
+
+        function logout(){
+            console.log('logout');
+            permisosFactory.logout();
+            $state.reload();
+        }
+
 
     });

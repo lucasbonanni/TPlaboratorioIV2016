@@ -5,8 +5,8 @@
         </div>
         <div class="col-md-8 col-sm-6">
             <div class="row">
-                <div class="col-md-6 hidden-sm hidden-xs"><center>Bienvenido!<strong> User</strong></center></div>
-                <div class="col-md-6">
+                <div class="col-md-6 hidden-sm hidden-xs" style="color:white;"><center>Bienvenido!<strong> {{userName}}</strong></center></div>
+                <!-- <div class="col-md-6">
                     <div class="pull-right hidden-sm hidden-xs btn-group btn-group-sm" style="margin-top:5px;">
                         <button class="btn btn-default" ui-sref="shop.productSummary">$ {{totalprice }}</button>
                             <button class="btn btn-info" ui-sref="shop.productSummary">
@@ -16,7 +16,7 @@
                                 <i class="icon-shopping-cart icon-white"></i>
                             </button>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row" style="margin-top:10px;">
                 <nav class="navbar navbar-default navbar-static-top" style="border-bottom-style: none; margin-bottom: 10px;">
@@ -42,7 +42,7 @@
                             <div class="col-md-7 col-sm-12">
                                 <ul class="nav navbar-nav navbar-left">
                                     <li ng-repeat="item in navMenuItems" ui-sref-active="active"><a ui-sref="{{item.state}}">{{item.text}}</a></li>
-
+                                    <li ng-show="isLogin"><a ng-click="logout()" href="">Salir</a></li>
                                     <li role="separator" class="divider"></li>
                                 </ul>
                             </div>
