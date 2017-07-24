@@ -35,27 +35,27 @@
                 <div class="form-group has-feedback">
                   <label class="control-label" for="inputEmail1">Email</label>
                   <div class="controls">
-                    <input class="form-control" type="email" id="inputEmail1" placeholder="Email" required>
+                    <input class="form-control" type="email" id="inputEmail1" placeholder="Email" ng-model="usuario.email" required>
                   </div>
                 </div>
                 <div class="form-group has-feedback">
                   <label class="control-label" for="inputPassword1">Contraseña</label>
                   <div class="controls">
-                    <input type="password" class="form-control" id="inputPassword1" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" id="inputPassword1" placeholder="Contraseña" ng-model="usuario.password" required>
                   </div>
                 </div>
                 <div class="form-group has-feedback">
                   <div class="controls">
-                    <center><button type="submit" class="btn btn-danger">Sign in</button> <a href="">Olvido la contraseña?</a></center>
+                    <center><button type="submit" class="btn btn-danger" ng-click="loguarse()">Sign in</button> <a href="">Olvido la contraseña?</a></center>
                   </div>
                 </div>
                 <div class="form-group has-feedback">
                   <center>
                     <div class="btn-group" role="group" aria-label="...">
-                      <button type="button" class="btn btn-success btn-xs">Cliente</button>
-                      <button type="button" class="btn btn-info btn-xs">Empleado</button>
-                      <button type="button" class="btn btn-warning btn-xs">Encargado</button>
-                      <button type="button" class="btn btn-danger btn-xs">Administrador</button>
+                      <button type="button" class="btn btn-success btn-xs" ng-click="cliente()">Cliente</button>
+                      <button type="button" class="btn btn-info btn-xs" ng-click="empleado()">Empleado</button>
+                      <button type="button" class="btn btn-warning btn-xs" ng-click="encargado()">Encargado</button>
+                      <button type="button" class="btn btn-danger btn-xs" ng-click="administrador()">Administrador</button>
                     </div>
                   </center>
                 </div>
