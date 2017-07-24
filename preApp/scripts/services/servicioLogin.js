@@ -6,9 +6,10 @@ angular
 
   	var userProfile = {};
 
-  	this.doLogin = function(user, password){
-  		user.mail = 'lucas@test.com';
-  		user.clave = 'miclave';
+  	this.doLogin = function(user){
+  		// user.email = 'lucas@test.com';
+		  // user.password = 'miclave';
+
   		return $auth.login(user).then(function(respuesta){
             return respuesta;
         }, function(error){
